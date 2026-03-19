@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abdul Hadi Komail</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{--primary:#1a3a5c;--accent:#2e86ab;--gold:#c9a84c;--light:#f5f7fa;--text:#2d2d2d;--muted:#6b7280;--border:#e2e8f0;--white:#fff;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--light);line-height:1.7;}
+  nav{position:fixed;top:0;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);z-index:1000;padding:0 1.5rem;}
+  .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px;}
+  .nav-logo{font-weight:700;font-size:1rem;color:var(--primary);cursor:pointer;letter-spacing:.5px;}
+  .nav-links{display:flex;gap:.15rem;flex-wrap:wrap;}
+  .nav-links button{background:none;border:none;padding:.35rem .6rem;font-size:.76rem;color:var(--muted);cursor:pointer;border-radius:6px;transition:all .2s;font-family:inherit;}
+  .nav-links button:hover,.nav-links button.active{background:var(--primary);color:var(--white);}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+  .hamburger span{display:block;width:22px;height:2px;background:var(--primary);border-radius:2px;}
+  .page{display:none;min-height:100vh;padding:78px 2rem 3rem;max-width:1100px;margin:0 auto;}
+  .page.active{display:block;}
+  .hero{display:flex;align-items:center;gap:3rem;padding:2.5rem 0 2rem;}
+  .avatar{width:140px;height:190px;border-radius:16px;overflow:hidden;flex-shrink:0;border:1.5px solid var(--gold);background:var(--light);}
+  .avatar img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+  .hero-text h1{font-size:2rem;color:var(--primary);font-weight:700;}
+  .hero-text h2{font-size:1rem;color:var(--accent);font-weight:400;margin:.3rem 0 .8rem;}
+  .hero-text p{color:var(--muted);max-width:540px;font-size:.93rem;}
+  .quick-links{display:flex;gap:.8rem;margin-top:1.1rem;flex-wrap:wrap;}
+  .btn{padding:.48rem 1.1rem;border-radius:8px;border:none;cursor:pointer;font-size:.86rem;font-family:inherit;transition:all .2s;}
+  .btn-primary{background:var(--primary);color:white;}
+  .btn-primary:hover{background:var(--accent);}
+  .btn-outline{background:none;border:1.5px solid var(--primary);color:var(--primary);}
+  .btn-outline:hover{background:var(--primary);color:white;}
+  .section-title{font-size:1.35rem;color:var(--primary);font-weight:700;margin-bottom:1.3rem;padding-bottom:.5rem;border-bottom:2px solid var(--gold);display:inline-block;}
+  .card{background:var(--white);border-radius:12px;padding:1.4rem;margin-bottom:1rem;border:1px solid var(--border);transition:box-shadow .2s;}
+  .card:hover{box-shadow:0 4px 18px rgba(0,0,0,.07);}
+  .card h3{color:var(--primary);font-size:.98rem;margin-bottom:.25rem;}
+  .card .meta{font-size:.82rem;color:var(--gold);font-weight:600;margin-bottom:.4rem;}
+  .card p{color:var(--muted);font-size:.9rem;}
+  .tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.7rem;}
+  .tag{background:var(--light);border:1px solid var(--border);border-radius:20px;padding:.2rem .7rem;font-size:.76rem;color:var(--primary);}
+  .tag.accent{background:#e8f4f8;border-color:#b8dde8;color:var(--accent);}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  .glance-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1rem;}
+  .skill-item{margin-bottom:.9rem;}
+  .skill-label{display:flex;justify-content:space-between;font-size:.86rem;margin-bottom:.25rem;color:var(--text);}
+  .skill-bar{background:var(--border);border-radius:10px;height:7px;overflow:hidden;}
+  .skill-fill{height:100%;border-radius:10px;background:#c9a84c;}
+  .contact-info .item{display:flex;align-items:center;gap:.8rem;padding:.65rem 0;border-bottom:1px solid var(--border);}
+  .contact-info .item:last-child{border-bottom:none;}
+  .ico{width:34px;height:34px;border-radius:8px;background:var(--light);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .badge{display:inline-block;background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:.12rem .55rem;font-size:.73rem;margin-left:.4rem;}
+  .insight-split{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-bottom:1.5rem;}
+  .insight-block{background:var(--white);border-radius:12px;padding:1.4rem;border:1px solid var(--border);}
+  .insight-block h3{color:var(--primary);font-size:.95rem;font-weight:700;margin-bottom:.8rem;}
+  .expr-card{background:var(--white);border-radius:12px;padding:1.4rem;border:1px solid var(--border);margin-bottom:1rem;}
+  .expr-card>h3{color:var(--primary);font-weight:700;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem;}
+  .expr-card .card h3{color:var(--primary);font-size:.88rem;margin-bottom:.25rem;text-align:center;display:block;}
+  .expr-card .card p{color:var(--muted);font-size:.78rem;text-align:center;}
+  .hobby-item{background:var(--white);border-radius:12px;padding:1.1rem 1.4rem;border:1px solid var(--border);display:flex;align-items:center;gap:1.2rem;margin-bottom:.8rem;}
+  .hobby-icon{flex-shrink:0;display:flex;align-items:center;justify-content:center;width:48px;}
+  .comp-grid{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.5rem;}
+  .comp-tag{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:.45rem 1rem;font-size:.83rem;color:var(--primary);font-weight:500;}
+  .proj-card{background:var(--white);border-radius:12px;padding:1.4rem;margin-bottom:1rem;border:1px solid var(--border);cursor:pointer;transition:box-shadow .2s;}
+  .proj-card:hover{box-shadow:0 4px 18px rgba(0,0,0,.07);}
+  .proj-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;}
+  .proj-header h3{color:var(--primary);font-size:.98rem;margin-bottom:.25rem;}
+  .proj-header .meta{font-size:.82rem;color:var(--gold);font-weight:600;margin-bottom:.4rem;}
+  .proj-arrow{font-size:1.1rem;color:var(--accent);flex-shrink:0;margin-top:.2rem;}
+  .proj-body{display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:1rem;}
+  .proj-body p{font-size:.88rem;color:var(--muted);margin-bottom:.7rem;}
+  .proj-body .kw{font-size:.82rem;color:var(--accent);}
+  .cert-link{display:inline-block;margin-top:.7rem;font-size:.8rem;color:var(--accent);text-decoration:none;}
+  .cert-link:hover{color:var(--primary);}
+  .lang-switcher{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--border);z-index:999;display:flex;justify-content:center;gap:.5rem;padding:.6rem 1rem;}
+  .lang-btn{background:none;border:1.5px solid var(--border);border-radius:20px;padding:.3rem .9rem;font-size:.78rem;color:var(--muted);cursor:pointer;font-family:inherit;transition:all .2s;}
+  .lang-btn:hover{border-color:var(--primary);color:var(--primary);}
+  .lang-btn.active{background:var(--primary);color:white;border-color:var(--primary);}
+  .page{padding-bottom:4rem;}
+  @media(max-width:1024px){.grid-3,.glance-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:768px){
+    .page{padding:70px 1.2rem 4rem;}
+    .hero{flex-direction:column;text-align:center;gap:1.5rem;}
+    .hero-text h1{font-size:1.6rem;}
+    .quick-links{justify-content:center;}
+    .grid-2,.grid-3,.insight-split,.glance-grid{grid-template-columns:1fr;}
+    .nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:white;border-bottom:1px solid var(--border);padding:.8rem 1rem;}
+    .nav-links.open{display:flex;}
+    .hamburger{display:flex;}
+    .section-title{font-size:1.15rem;}
+  }
+  @media(max-width:480px){
+    .page{padding:68px 1rem 4rem;}
+    .hero-text h1{font-size:1.4rem;}
+    .avatar{width:110px;height:150px;}
+    .glance-grid{grid-template-columns:1fr 1fr !important;}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo" onclick="showPage('home')">✦ HADI KOMAIL</span>
+    <div class="nav-links" id="navLinks">
+      <button onclick="showPage('home')" class="active" data-key="nav_profile">Profile</button>
+      <button onclick="showPage('insight')" data-key="nav_insight">Insight</button>
+      <button onclick="showPage('expression')" data-key="nav_expression">Expression</button>
+      <button onclick="showPage('education')" data-key="nav_education">Education</button>
+      <button onclick="showPage('experience')" data-key="nav_experience">Experience</button>
+      <button onclick="showPage('certificates')" data-key="nav_certificates">Certificates</button>
+      <button onclick="showPage('awards')" data-key="nav_awards">Awards</button>
+      <button onclick="showPage('skills')" data-key="nav_skills">Skills</button>
+      <button onclick="showPage('projects')" data-key="nav_projects">Projects</button>
+      <button onclick="showPage('hobbies')" data-key="nav_hobbies">Hobbies</button>
+      <button onclick="showPage('contact')" data-key="nav_contact">Contact</button>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- PROFILE -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="avatar">
+      <img src="https://lh3.googleusercontent.com/d/1L3h_6OSFDc70e_QbZiTJcHt_y0-o5fos" alt="Hadi Komail" onerror="this.parentElement.innerHTML='<div style=\'width:100%;height:100%;background:linear-gradient(135deg,#1a3a5c,#2e86ab);display:flex;align-items:center;justify-content:center;font-size:2.5rem;\'>👤</div>'"/>
+    </div>
+    <div class="hero-text">
+      <h1>HADI KOMAIL</h1>
+      <h2 data-key="hero_subtitle">Sociologist · Data Analyst · Calligrapher & Graphic Designer</h2>
+      <p data-key="hero_bio">In a world that reduces human experience to data and algorithms, I use data, design, and code to explore its complexity instead of simplifying it. With a background in sociology and international relations, I see digital tools as just one limited but useful way to approach the complexity of human nature.</p>
+      <div class="quick-links">
+        <button class="btn btn-primary" onclick="showPage('contact')" data-key="btn_contact">Get in Touch</button>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:1.5rem;">
+    <span class="section-title" data-key="glance_title">At a Glance</span>
+    <div class="glance-grid">
+      <div class="card" style="text-align:center;padding:1.5rem 1rem;">
+        <svg viewBox="0 0 90 90" width="72" height="72" fill="none" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:.8rem;"><circle cx="38" cy="38" r="26" stroke-width="2.2"/><path d="M20,22 Q26,16 34,20" stroke-width="1.4"/><line x1="57" y1="57" x2="76" y2="76" stroke-width="3.5"/><circle cx="30" cy="40" r="4" stroke-width="1.8"/><circle cx="44" cy="30" r="4" stroke-width="1.8"/><circle cx="46" cy="46" r="4" stroke-width="1.8"/><line x1="33" y1="38" x2="41" y2="33" stroke-width="1.2"/><line x1="44" y1="34" x2="45" y2="42" stroke-width="1.2"/><line x1="33" y1="42" x2="43" y2="46" stroke-width="1.2"/></svg>
+        <h3 style="font-size:.95rem;margin-bottom:.5rem;color:var(--primary);" data-key="glance_research">Research Methods</h3>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.6;" data-key="glance_research_sub">Qualitative<br>Quantitative<br>Mixed Methods</p>
+      </div>
+      <div class="card" style="text-align:center;padding:1.5rem 1rem;">
+        <svg viewBox="0 0 90 90" width="72" height="72" fill="none" stroke="#c9a84c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:.8rem;"><rect x="8" y="10" width="74" height="50" rx="5"/><polyline points="16,42 26,22 36,50 46,16 56,38 66,26 76,40" stroke-width="2" stroke-linejoin="round"/><line x1="16" y1="48" x2="76" y2="48" stroke-width="1" opacity="0.35"/><line x1="45" y1="60" x2="45" y2="70" stroke-width="2"/><line x1="28" y1="70" x2="62" y2="70" stroke-width="2.5"/><circle cx="26" cy="22" r="3" fill="#c9a84c" stroke="none"/><circle cx="46" cy="16" r="3" fill="#c9a84c" stroke="none"/><circle cx="66" cy="26" r="3" fill="#c9a84c" stroke="none"/></svg>
+        <h3 style="font-size:.95rem;margin-bottom:.5rem;color:var(--primary);" data-key="glance_data">Data Analysis</h3>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.6;">Statistics<br>Python<br>MAXQDA</p>
+      </div>
+      <div class="card" style="text-align:center;padding:1.5rem 1rem;">
+        <svg viewBox="0 0 524.35 800.32" width="48" height="72" fill="#c9a84c" style="margin-bottom:.8rem;"><path d="M522.21,425.07c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path d="M522.21,307.32c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path d="M313.5,551.69c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path d="M361.06,422.85c0,13.27-6.64,29.31-18.8,48.66-12.16,18.8-21.01,28.2-26.54,28.2-3.87,0-10.51-4.42-18.25-13.27-11.61-12.17-21.01-21.57-28.2-27.09-18.25,39.81-32.63,59.17-43.69,59.17-2.21,0-11.06-6.09-26.54-19.36-15.48-13.27-23.22-21.01-23.22-23.22,0-4.42,7.19-20.46,21.01-48.66,14.37-27.65,23.22-42.03,26.54-42.03,5.53,0,14.38,5.53,25.99,16.03,11.61,9.96,19.36,19.91,23.23,28.75,7.19-12.72,14.37-24.88,21.01-36.49,9.95-17.69,16.03-25.99,18.25-25.99,8.3,0,18.25,6.08,30.41,17.69,12.17,13.82,18.8,26.54,18.8,37.6Z"/><path d="M513.44,502.53c1.93,0,1.93,3.85-.64,11.55-1.92,5.14-7.06,16.69-16.04,36.58-13.48,24.39-27.6,48.13-41.71,69.32-23.75,34.66-51.34,64.82-81.51,90.49-28.88,25.67-58.4,45.57-89.21,60.97-39.79,19.25-82.79,28.88-129,28.88-51.34,0-91.13-16.69-118.09-48.78C12.19,722.02,0,683.51,0,636.66c0-17.33,1.28-34.66,3.85-51.99,1.93-18.61,7.7-41.72,17.97-69.32,14.76-42.36,34.66-82.79,60.97-120.66,14.12-21.18,31.45-42.36,50.7-62.89,7.06-7.7,17.33-17.33,30.16-28.88,13.48-11.55,23.75-19.9,30.81-25.67,7.06-5.77,12.83-9.62,17.33-13.48,3.85-3.21,7.7-5.78,11.55-8.34,7.06-5.78,10.91-8.99,10.91-11.55-1.28-3.21-7.06-5.78-19.25-8.34l-45.57-2.57h-45.57c-1.92,0-4.49,0-5.77-1.28.64-1.28,1.28-3.85,1.92-5.78.64-2.57,1.93-4.49,3.21-6.42.64-3.85,3.21-9.63,8.34-17.97.64-1.92,1.93-2.57,2.57-4.49.64-1.28,1.28-1.92,2.57-3.21,1.93-3.21,3.21-5.77,5.14-8.34,1.92-1.92,3.85-5.13,5.77-7.06,5.14-7.7,11.55-14.76,16.69-20.54,10.27-11.55,19.9-21.18,30.81-28.24,14.76-12.19,35.3-23.1,61.61-34.01,23.75-8.99,44.93-14.12,63.54-14.12,5.78,0,12.19,1.28,19.26,3.85.64.64.64,1.28.64,1.93v-1.93c3.21,1.93,7.7,3.85,14.12,6.42,4.49,2.57,8.34,3.85,10.91,3.85,7.7,0,14.12-2.57,19.25-6.42,3.85-3.21,10.27-10.91,17.97-21.82,13.48-22.47,22.46-35.3,25.67-38.51,12.19-13.48,24.39-20.53,37.87-20.53,6.42,0,12.19,2.57,16.69,7.06,3.21,4.49,5.77,6.42,7.06,6.42,3.21,0,7.06-3.85,10.91-10.91,3.85-7.06,6.42-10.91,8.99-10.91,3.85,0,7.06,3.21,10.27,9.62,3.21,6.42,4.49,12.84,4.49,17.97,0,12.19-5.13,25.67-14.76,39.79-1.92,3.21-4.49,5.77-7.06,8.34h-.64c-3.21,11.55-7.7,28.24-15.4,44.93-12.84,27.6-18.61,45.57-17.97,53.91,0,1.93,4.49,4.49,13.48,8.99,8.99,3.85,13.48,11.55,13.48,23.75,0,7.06-2.57,14.76-7.06,23.1-5.77,7.06-11.55,10.27-17.97,10.27-8.34,0-13.48-3.21-16.04-10.27-3.21-5.77-5.14-14.12-5.14-23.1,0-21.18,8.99-49.42,25.67-85.36,7.7-15.4,13.48-29.52,17.97-39.79-5.77,3.21-11.55,4.49-17.97,3.21-2.57,0-7.06-1.92-14.76-5.77-7.06-3.85-13.48-6.42-20.53-6.42s-15.41,6.42-24.39,17.97c-10.91,15.4-18.61,26.31-23.75,33.37-14.76,19.9-32.09,30.16-51.35,30.16v-1.28s-.64.64-.64,1.28c0,0-8.99-3.21-26.96-9.63-10.27-3.85-19.25-5.77-26.31-5.77-12.84,0-28.24,2.57-46.85,7.7-17.97,4.49-35.3,12.84-51.34,23.75-2.57,1.28-8.34,5.78-14.76,13.48l-5.78,7.06-3.85,3.85,64.82-3.85c26.95,0,45.57,1.92,55.84,4.49,10.27,3.21,15.4,9.62,15.4,19.9,0,13.48-8.98,26.95-26.31,39.79-8.99,4.49-17.33,10.27-25.03,16.04-8.34,5.14-16.04,10.91-23.75,16.04-29.52,21.18-58.4,46.21-86,75.09-10.27,9.63-23.11,25.03-37.23,46.85-14.12,20.53-24.39,37.86-30.17,53.91-10.27,25.03-15.4,43.64-17.33,55.84-1.93,10.27-1.93,19.25-1.93,26.32,0,53.91,17.33,93.06,53.27,117.45,29.52,18.61,68.03,27.6,116.17,27.6,36.58,0,69.96-5.77,100.76-17.33,16.04-6.42,34.66-16.04,55.19-29.52,25.03-16.04,46.21-34.01,66.11-54.55,11.55-14.12,25.03-31.45,39.79-50.7,16.69-25.67,26.95-37.86,30.16-35.94Z"/></svg>
+        <h3 style="font-size:.95rem;margin-bottom:.5rem;color:var(--primary);" data-key="glance_calli">Calligraphy</h3>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.6;" data-key="glance_calli_sub">Nastaliq<br>Traditional<br>Digital</p>
+      </div>
+      <div class="card" style="text-align:center;padding:1.5rem 1rem;">
+        <svg viewBox="0 0 658.4 592.96" width="72" height="65" fill="#c9a84c" style="margin-bottom:.8rem;"><g><path d="M56.23,337.39h-10.38v-18.03h10.38v18.03ZM56.23,301.33h-10.38v-18.03h10.38v18.03ZM56.23,265.27h-10.38v-18.03h10.38v18.03ZM56.23,229.21h-10.38v-18.03h10.38v18.03ZM56.23,193.15h-10.38v-18.03h10.38v18.03ZM56.23,157.08h-10.38v-18.03h10.38v18.03ZM56.23,121.03h-10.38v-18.03h10.38v18.03Z"/><path d="M612.59,330.32h-10.38v-18.03h10.38v18.03ZM612.59,294.25h-10.38v-18.03h10.38v18.03ZM612.59,258.19h-10.38v-18.03h10.38v18.03ZM612.59,222.13h-10.38v-18.03h10.38v18.03ZM612.59,186.07h-10.38v-18.03h10.38v18.03ZM612.59,150.01h-10.38v-18.03h10.38v18.03ZM612.59,113.95h-10.38v-18.03h10.38v18.03Z"/></g><g><path d="M516.39,260.82h-89.66c-7.26,0-13.16-5.91-13.16-13.16v-89.66c0-7.26,5.91-13.16,13.16-13.16h89.66c7.26,0,13.17,5.91,13.17,13.16v89.66c0,7.26-5.91,13.16-13.17,13.16ZM426.73,155.22c-1.53,0-2.78,1.25-2.78,2.78v89.66c0,1.53,1.25,2.78,2.78,2.78h89.66c1.54,0,2.78-1.25,2.78-2.78v-89.66c0-1.53-1.25-2.78-2.78-2.78h-89.66Z"/><path d="M329.99,263.8c-33.62,0-60.98-27.35-60.98-60.97s27.35-60.98,60.98-60.98,60.97,27.35,60.97,60.98-27.35,60.97-60.97,60.97ZM329.99,152.24c-27.89,0-50.59,22.7-50.59,50.59s22.7,50.59,50.59,50.59,50.59-22.69,50.59-50.59-22.69-50.59-50.59-50.59Z"/><path d="M228.4,255.76h-81.52c-6.1,0-11.56-3.15-14.6-8.43s-3.05-11.58,0-16.86l40.76-70.6c3.05-5.28,8.51-8.43,14.6-8.43s11.56,3.15,14.6,8.43l40.76,70.6c3.05,5.28,3.05,11.58,0,16.86s-8.51,8.43-14.6,8.43ZM187.64,161.82c-1.13,0-3.92.31-5.61,3.24l-40.76,70.6c-1.69,2.92-.56,5.5,0,6.48.56.97,2.23,3.24,5.61,3.24h81.52c3.38,0,5.05-2.27,5.61-3.24.56-.97,1.69-3.55,0-6.48l-40.76-70.6c-1.69-2.93-4.48-3.24-5.61-3.24Z"/></g><g><g><path d="M597.69,530.09c-2.87,0-5.19-2.32-5.19-5.19v-8.69c0-2.87,2.32-5.19,5.19-5.19s5.19,2.32,5.19,5.19v8.69c0,2.87-2.32,5.19-5.19,5.19Z"/><path d="M597.69,590.01c-19.38,0-35.14-15.76-35.14-35.14v-32.84c0-19.38,15.76-35.14,35.14-35.14s35.14,15.76,35.14,35.14v32.84c0,19.38-15.76,35.14-35.14,35.14ZM597.69,497.29c-13.65,0-24.75,11.1-24.75,24.75v32.84c0,13.65,11.1,24.75,24.75,24.75s24.76-11.1,24.76-24.75v-32.84c0-13.65-11.1-24.75-24.76-24.75Z"/></g><path d="M500.83,592.96H41.78c-8.92,0-16.18-7.26-16.18-16.18v-76.64c0-8.92,7.26-16.18,16.18-16.18h459.06c8.92,0,16.18,7.26,16.18,16.18v76.64c0,8.92-7.26,16.18-16.18,16.18ZM41.78,494.34c-3.19,0-5.79,2.6-5.79,5.79v76.64c0,3.19,2.6,5.79,5.79,5.79h459.06c3.19,0,5.79-2.6,5.79-5.79v-76.64c0-3.19-2.6-5.79-5.79-5.79H41.78Z"/></g><path d="M653.21,431.29h-318.82v-29.91h256.09c37.07,0,67.29-30.22,67.29-67.29V67.29c0-37.07-30.22-67.29-67.29-67.29H67.92C30.84,0,.73,30.22.73,67.29v266.79c0,37.07,30.12,67.29,67.19,67.29h256.09v29.91H5.19c-2.8,0-5.19,2.39-5.19,5.19s2.39,5.19,5.19,5.19h648.02c2.91,0,5.19-2.29,5.19-5.19s-2.28-5.19-5.19-5.19ZM67.92,390.99c-31.36,0-56.81-25.55-56.81-56.91V67.29c0-31.36,25.44-56.91,56.81-56.91h522.57c31.36,0,56.91,25.55,56.91,56.91v266.79c0,31.36-25.55,56.91-56.91,56.91H67.92Z"/></svg>
+        <h3 style="font-size:.95rem;margin-bottom:.5rem;color:var(--primary);" data-key="glance_design">Graphic Designing</h3>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.6;" data-key="glance_design_sub">Logo<br>Infograph<br>Data Visualization</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INSIGHT -->
+<div class="page" id="page-insight">
+  <span class="section-title" data-key="insight_title">Insight — Research & Data Analysis</span>
+  <p style="color:var(--muted);margin-bottom:1.5rem;font-size:.92rem;" data-key="insight_intro">My research expertise bridges qualitative and quantitative methodologies, supported by hands-on experience with modern data analysis tools and academic research environments.</p>
+  <div class="insight-split">
+    <div class="insight-block"><h3 data-key="qual_title">Qualitative Methods</h3><p style="color:var(--muted);font-size:.9rem;" data-key="qual_desc">Thematic coding, MAXQDA for analysis, survey design and execution, academic literature review, mixed-methods integration, and field research.</p></div>
+    <div class="insight-block"><h3 data-key="quant_title">Quantitative Methods</h3><p style="color:var(--muted);font-size:.9rem;" data-key="quant_desc">Descriptive and inferential statistics, hypothesis testing, survey-based research, data cleaning and analysis using Python, SPSS, SQL, Excel, and Tableau.</p></div>
+  </div>
+  <span class="section-title" data-key="tools_title">Data Analysis Tools</span>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-top:1rem;">
+    <div class="skill-item"><div class="skill-label"><span>Python</span></div><div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div></div>
+    <div class="skill-item"><div class="skill-label"><span>SPSS</span></div><div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div></div>
+    <div class="skill-item"><div class="skill-label"><span>SQL</span></div><div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div></div>
+    <div class="skill-item"><div class="skill-label"><span>Tableau</span></div><div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div></div>
+    <div class="skill-item"><div class="skill-label"><span>Jupyter Notebook</span></div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+    <div class="skill-item"><div class="skill-label"><span>Google Colab</span></div><div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div></div>
+    <div class="skill-item"><div class="skill-label"><span>Excel</span></div><div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div></div>
+    <div class="skill-item"><div class="skill-label"><span>MAXQDA</span></div><div class="skill-bar"><div class="skill-fill" style="width:83%"></div></div></div>
+  </div>
+</div>
+
+<!-- EXPRESSION -->
+<div class="page" id="page-expression">
+  <span class="section-title" data-key="expr_title">Expression — Design & Calligraphy</span>
+  <p style="color:var(--muted);margin-bottom:1.5rem;font-size:.92rem;" data-key="expr_intro">My creative journey began with poetry and calligraphy as a response to witnessing hardship — a need to process the world through art before I had the language of social science to do so.</p>
+  <div class="expr-card">
+    <h3>
+      <svg viewBox="0 0 658.4 592.96" width="26" height="24" fill="#1a3a5c"><g><path d="M56.23,337.39h-10.38v-18.03h10.38v18.03ZM56.23,301.33h-10.38v-18.03h10.38v18.03ZM56.23,265.27h-10.38v-18.03h10.38v18.03ZM56.23,229.21h-10.38v-18.03h10.38v18.03ZM56.23,193.15h-10.38v-18.03h10.38v18.03ZM56.23,157.08h-10.38v-18.03h10.38v18.03ZM56.23,121.03h-10.38v-18.03h10.38v18.03Z"/><path d="M612.59,330.32h-10.38v-18.03h10.38v18.03ZM612.59,294.25h-10.38v-18.03h10.38v18.03ZM612.59,258.19h-10.38v-18.03h10.38v18.03ZM612.59,222.13h-10.38v-18.03h10.38v18.03ZM612.59,186.07h-10.38v-18.03h10.38v18.03ZM612.59,150.01h-10.38v-18.03h10.38v18.03ZM612.59,113.95h-10.38v-18.03h10.38v18.03Z"/></g><g><path d="M516.39,260.82h-89.66c-7.26,0-13.16-5.91-13.16-13.16v-89.66c0-7.26,5.91-13.16,13.16-13.16h89.66c7.26,0,13.17,5.91,13.17,13.16v89.66c0,7.26-5.91,13.16-13.17,13.16ZM426.73,155.22c-1.53,0-2.78,1.25-2.78,2.78v89.66c0,1.53,1.25,2.78,2.78,2.78h89.66c1.54,0,2.78-1.25,2.78-2.78v-89.66c0-1.53-1.25-2.78-2.78-2.78h-89.66Z"/><path d="M329.99,263.8c-33.62,0-60.98-27.35-60.98-60.97s27.35-60.98,60.98-60.98,60.97,27.35,60.97,60.98-27.35,60.97-60.97,60.97ZM329.99,152.24c-27.89,0-50.59,22.7-50.59,50.59s22.7,50.59,50.59,50.59,50.59-22.69,50.59-50.59-22.69-50.59-50.59-50.59Z"/><path d="M228.4,255.76h-81.52c-6.1,0-11.56-3.15-14.6-8.43s-3.05-11.58,0-16.86l40.76-70.6c3.05-5.28,8.51-8.43,14.6-8.43s11.56,3.15,14.6,8.43l40.76,70.6c3.05,5.28,3.05,11.58,0,16.86s-8.51,8.43-14.6,8.43ZM187.64,161.82c-1.13,0-3.92.31-5.61,3.24l-40.76,70.6c-1.69,2.92-.56,5.5,0,6.48.56.97,2.23,3.24,5.61,3.24h81.52c3.38,0,5.05-2.27,5.61-3.24.56-.97,1.69-3.55,0-6.48l-40.76-70.6c-1.69-2.93-4.48-3.24-5.61-3.24Z"/></g><g><g><path d="M597.69,530.09c-2.87,0-5.19-2.32-5.19-5.19v-8.69c0-2.87,2.32-5.19,5.19-5.19s5.19,2.32,5.19,5.19v8.69c0,2.87-2.32,5.19-5.19,5.19Z"/><path d="M597.69,590.01c-19.38,0-35.14-15.76-35.14-35.14v-32.84c0-19.38,15.76-35.14,35.14-35.14s35.14,15.76,35.14,35.14v32.84c0,19.38-15.76,35.14-35.14,35.14ZM597.69,497.29c-13.65,0-24.75,11.1-24.75,24.75v32.84c0,13.65,11.1,24.75,24.75,24.75s24.76-11.1,24.76-24.75v-32.84c0-13.65-11.1-24.75-24.76-24.75Z"/></g><path d="M500.83,592.96H41.78c-8.92,0-16.18-7.26-16.18-16.18v-76.64c0-8.92,7.26-16.18,16.18-16.18h459.06c8.92,0,16.18,7.26,16.18,16.18v76.64c0,8.92-7.26,16.18-16.18,16.18ZM41.78,494.34c-3.19,0-5.79,2.6-5.79,5.79v76.64c0,3.19,2.6,5.79,5.79,5.79h459.06c3.19,0,5.79-2.6,5.79-5.79v-76.64c0-3.19-2.6-5.79-5.79-5.79H41.78Z"/></g><path d="M653.21,431.29h-318.82v-29.91h256.09c37.07,0,67.29-30.22,67.29-67.29V67.29c0-37.07-30.22-67.29-67.29-67.29H67.92C30.84,0,.73,30.22.73,67.29v266.79c0,37.07,30.12,67.29,67.19,67.29h256.09v29.91H5.19c-2.8,0-5.19,2.39-5.19,5.19s2.39,5.19,5.19,5.19h648.02c2.91,0,5.19-2.29,5.19-5.19s-2.28-5.19-5.19-5.19ZM67.92,390.99c-31.36,0-56.81-25.55-56.81-56.91V67.29c0-31.36,25.44-56.91,56.81-56.91h522.57c31.36,0,56.91,25.55,56.91,56.91v266.79c0,31.36-25.55,56.91-56.91,56.91H67.92Z"/></svg>
+      <span data-key="expr_gd">Graphic Design</span>
+    </h3>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;" data-key="expr_gd_desc">Creating compelling visual identities, digital artwork, infographics, data storytelling visuals, and motion graphics using the Adobe Creative Suite.</p>
+    <div class="grid-3">
+      <div class="card" style="padding:1rem;text-align:center;"><svg width="52" height="52" viewBox="0 0 52 52" style="margin-bottom:.4rem;"><path d="M4,16 Q4,4 16,4" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><path d="M36,4 Q48,4 48,16" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><path d="M48,36 Q48,48 36,48" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><path d="M16,48 Q4,48 4,36" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><text x="26" y="34" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-weight="bold" fill="#1a3a5c">Ps</text></svg><h3>Photoshop</h3><p data-key="ps_desc">Editing & composition</p></div>
+      <div class="card" style="padding:1rem;text-align:center;"><svg width="52" height="52" viewBox="0 0 52 52" style="margin-bottom:.4rem;"><path d="M4,16 Q4,4 16,4" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><path d="M36,4 Q48,4 48,16" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><path d="M48,36 Q48,48 36,48" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><path d="M16,48 Q4,48 4,36" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><text x="26" y="34" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-weight="bold" fill="#1a3a5c">Ai</text></svg><h3>Illustrator</h3><p data-key="ai_desc">Vector graphics & branding</p></div>
+      <div class="card" style="padding:1rem;text-align:center;"><svg width="52" height="52" viewBox="0 0 52 52" style="margin-bottom:.4rem;"><path d="M4,16 Q4,4 16,4" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><path d="M36,4 Q48,4 48,16" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><path d="M48,36 Q48,48 36,48" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><path d="M16,48 Q4,48 4,36" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round"/><text x="26" y="34" text-anchor="middle" font-family="Georgia,serif" font-size="20" font-weight="bold" fill="#1a3a5c">Ae</text></svg><h3>After Effects</h3><p data-key="ae_desc">Motion graphics & animation</p></div>
+    </div>
+    <div class="tags" style="margin-top:1rem;"><span class="tag" data-key="tag_infographic">Infographic Design</span><span class="tag" data-key="tag_datastory">Data Storytelling</span><span class="tag" data-key="tag_branding">Branding Assets</span><span class="tag" data-key="tag_layout">Visual Layout</span></div>
+  </div>
+  <div class="expr-card">
+    <h3>
+      <svg viewBox="0 0 524.35 800.32" width="22" height="33" fill="#1a3a5c"><path d="M522.21,425.07c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path d="M522.21,307.32c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path d="M313.5,551.69c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path d="M361.06,422.85c0,13.27-6.64,29.31-18.8,48.66-12.16,18.8-21.01,28.2-26.54,28.2-3.87,0-10.51-4.42-18.25-13.27-11.61-12.17-21.01-21.57-28.2-27.09-18.25,39.81-32.63,59.17-43.69,59.17-2.21,0-11.06-6.09-26.54-19.36-15.48-13.27-23.22-21.01-23.22-23.22,0-4.42,7.19-20.46,21.01-48.66,14.37-27.65,23.22-42.03,26.54-42.03,5.53,0,14.38,5.53,25.99,16.03,11.61,9.96,19.36,19.91,23.23,28.75,7.19-12.72,14.37-24.88,21.01-36.49,9.95-17.69,16.03-25.99,18.25-25.99,8.3,0,18.25,6.08,30.41,17.69,12.17,13.82,18.8,26.54,18.8,37.6Z"/><path d="M513.44,502.53c1.93,0,1.93,3.85-.64,11.55-1.92,5.14-7.06,16.69-16.04,36.58-13.48,24.39-27.6,48.13-41.71,69.32-23.75,34.66-51.34,64.82-81.51,90.49-28.88,25.67-58.4,45.57-89.21,60.97-39.79,19.25-82.79,28.88-129,28.88-51.34,0-91.13-16.69-118.09-48.78C12.19,722.02,0,683.51,0,636.66c0-17.33,1.28-34.66,3.85-51.99,1.93-18.61,7.7-41.72,17.97-69.32,14.76-42.36,34.66-82.79,60.97-120.66,14.12-21.18,31.45-42.36,50.7-62.89,7.06-7.7,17.33-17.33,30.16-28.88,13.48-11.55,23.75-19.9,30.81-25.67,7.06-5.77,12.83-9.62,17.33-13.48,3.85-3.21,7.7-5.78,11.55-8.34,7.06-5.78,10.91-8.99,10.91-11.55-1.28-3.21-7.06-5.78-19.25-8.34l-45.57-2.57h-45.57c-1.92,0-4.49,0-5.77-1.28.64-1.28,1.28-3.85,1.92-5.78.64-2.57,1.93-4.49,3.21-6.42.64-3.85,3.21-9.63,8.34-17.97.64-1.92,1.93-2.57,2.57-4.49.64-1.28,1.28-1.92,2.57-3.21,1.93-3.21,3.21-5.77,5.14-8.34,1.92-1.92,3.85-5.13,5.77-7.06,5.14-7.7,11.55-14.76,16.69-20.54,10.27-11.55,19.9-21.18,30.81-28.24,14.76-12.19,35.3-23.1,61.61-34.01,23.75-8.99,44.93-14.12,63.54-14.12,5.78,0,12.19,1.28,19.26,3.85.64.64.64,1.28.64,1.93v-1.93c3.21,1.93,7.7,3.85,14.12,6.42,4.49,2.57,8.34,3.85,10.91,3.85,7.7,0,14.12-2.57,19.25-6.42,3.85-3.21,10.27-10.91,17.97-21.82,13.48-22.47,22.46-35.3,25.67-38.51,12.19-13.48,24.39-20.53,37.87-20.53,6.42,0,12.19,2.57,16.69,7.06,3.21,4.49,5.77,6.42,7.06,6.42,3.21,0,7.06-3.85,10.91-10.91,3.85-7.06,6.42-10.91,8.99-10.91,3.85,0,7.06,3.21,10.27,9.62,3.21,6.42,4.49,12.84,4.49,17.97,0,12.19-5.13,25.67-14.76,39.79-1.92,3.21-4.49,5.77-7.06,8.34h-.64c-3.21,11.55-7.7,28.24-15.4,44.93-12.84,27.6-18.61,45.57-17.97,53.91,0,1.93,4.49,4.49,13.48,8.99,8.99,3.85,13.48,11.55,13.48,23.75,0,7.06-2.57,14.76-7.06,23.1-5.77,7.06-11.55,10.27-17.97,10.27-8.34,0-13.48-3.21-16.04-10.27-3.21-5.77-5.14-14.12-5.14-23.1,0-21.18,8.99-49.42,25.67-85.36,7.7-15.4,13.48-29.52,17.97-39.79-5.77,3.21-11.55,4.49-17.97,3.21-2.57,0-7.06-1.92-14.76-5.77-7.06-3.85-13.48-6.42-20.53-6.42s-15.41,6.42-24.39,17.97c-10.91,15.4-18.61,26.31-23.75,33.37-14.76,19.9-32.09,30.16-51.35,30.16v-1.28s-.64.64-.64,1.28c0,0-8.99-3.21-26.96-9.63-10.27-3.85-19.25-5.77-26.31-5.77-12.84,0-28.24,2.57-46.85,7.7-17.97,4.49-35.3,12.84-51.34,23.75-2.57,1.28-8.34,5.78-14.76,13.48l-5.78,7.06-3.85,3.85,64.82-3.85c26.95,0,45.57,1.92,55.84,4.49,10.27,3.21,15.4,9.62,15.4,19.9,0,13.48-8.98,26.95-26.31,39.79-8.99,4.49-17.33,10.27-25.03,16.04-8.34,5.14-16.04,10.91-23.75,16.04-29.52,21.18-58.4,46.21-86,75.09-10.27,9.63-23.11,25.03-37.23,46.85-14.12,20.53-24.39,37.86-30.17,53.91-10.27,25.03-15.4,43.64-17.33,55.84-1.93,10.27-1.93,19.25-1.93,26.32,0,53.91,17.33,93.06,53.27,117.45,29.52,18.61,68.03,27.6,116.17,27.6,36.58,0,69.96-5.77,100.76-17.33,16.04-6.42,34.66-16.04,55.19-29.52,25.03-16.04,46.21-34.01,66.11-54.55,11.55-14.12,25.03-31.45,39.79-50.7,16.69-25.67,26.95-37.86,30.16-35.94Z"/></svg>
+      <span data-key="expr_calli">Nastaliq Calligraphy</span>
+    </h3>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;" data-key="expr_calli_desc">Practiced in the classical Nastaliq script — one of the most refined forms of Perso-Arabic calligraphy — across traditional and contemporary digital styles.</p>
+    <div class="grid-2">
+      <div class="card" style="padding:1rem;text-align:center;">
+        <svg viewBox="0 0 445.14 582.77" width="44" height="58" fill="#c9a84c" style="margin-bottom:.5rem;"><g><path d="M275,202.19c-.11,2.51-1.25,5.7-3.53,9.35-2.39,3.53-3.99,5.36-4.79,5.36-.57-.11-1.37-.57-2.17-1.6-1.03-1.14-2.16-2.28-3.31-3.53-.91-.8-1.94-1.6-2.96-2.51-.91-.91-1.37-1.6-1.37-2.28s1.48-3.65,4.33-8.66c2.85-5.13,4.56-7.52,5.24-7.52,1.71.23,3.65,1.48,5.7,4.1,2.05,2.51,3.08,4.9,2.85,7.3Z"/><path d="M275,177.92c-.11,2.51-1.25,5.7-3.53,9.35-2.39,3.53-3.99,5.36-4.79,5.36-.57-.11-1.37-.57-2.17-1.6-1.03-1.14-2.16-2.28-3.31-3.53-.91-.8-1.94-1.6-2.96-2.51-.91-.91-1.37-1.6-1.37-2.28s1.48-3.65,4.33-8.66c2.85-5.13,4.56-7.52,5.24-7.52,1.71.23,3.65,1.48,5.7,4.1,2.05,2.51,3.08,4.9,2.85,7.3Z"/></g><g><path d="M231.98,228.29c-.11,2.51-1.25,5.7-3.53,9.35-2.39,3.53-3.99,5.36-4.79,5.36-.57-.11-1.37-.57-2.17-1.6-1.03-1.14-2.16-2.28-3.31-3.53-.91-.8-1.94-1.6-2.96-2.51-.91-.91-1.37-1.6-1.37-2.28s1.48-3.65,4.33-8.66c2.85-5.13,4.56-7.52,5.24-7.52,1.71.23,3.65,1.48,5.7,4.1,2.05,2.51,3.08,4.9,2.85,7.3Z"/><path d="M241.78,201.73c0,2.74-1.37,6.04-3.88,10.03-2.51,3.88-4.33,5.81-5.47,5.81-.8,0-2.17-.91-3.76-2.74-2.39-2.51-4.33-4.45-5.81-5.59-3.76,8.21-6.73,12.2-9.01,12.2-.46,0-2.28-1.25-5.47-3.99-3.19-2.74-4.79-4.33-4.79-4.79,0-.91,1.48-4.22,4.33-10.03,2.96-5.7,4.79-8.66,5.47-8.66,1.14,0,2.96,1.14,5.36,3.31,2.39,2.05,3.99,4.1,4.79,5.93,1.48-2.62,2.96-5.13,4.33-7.52,2.05-3.65,3.31-5.36,3.76-5.36,1.71,0,3.76,1.25,6.27,3.65,2.51,2.85,3.88,5.47,3.88,7.75Z"/></g><g><path d="M397.81,396.89V34.13c0-18.79-15.21-34.13-34-34.13H81.76c-18.92,0-34.26,15.35-34.26,34.13v392.39h-13.49c-18.79,0-34,15.35-34,34.13v16.93c0,18.79,15.21,34,34,34h366.86c7.94,0,14.29-6.35,14.29-14.29v-22.36c16.01-.26,28.84-13.23,28.84-29.24v-48.82h-46.17ZM58.87,34.13c0-12.44,10.19-22.62,22.89-22.62h282.05c12.44,0,22.62,10.19,22.62,22.62v362.75h-178.33v29.63H58.87V34.13ZM34,500.21c-12.44,0-22.62-10.19-22.62-22.62v-16.93c0-12.57,10.19-22.75,22.62-22.75h174.1v7.8c0,16.01,12.96,29.11,28.84,29.24v22.36c0,.93.13,1.98.26,2.91H34ZM403.76,497.3c0,1.59-1.32,2.91-2.91,2.91h-149.63c-1.59,0-2.78-1.32-2.78-2.91v-22.36h155.31v22.36ZM432.61,445.7c0,9.92-8.07,17.86-17.86,17.86h-177.28c-9.92,0-17.86-7.94-17.86-17.86v-37.44h213v37.44Z"/><path d="M273.19,218.15c.4,0,.4.79-.13,2.38-.4,1.06-1.46,3.44-3.31,7.54-2.78,5.03-5.69,9.92-8.6,14.29-4.89,7.14-10.58,13.36-16.8,18.65-5.95,5.29-12.04,9.39-18.39,12.57-8.2,3.97-17.07,5.95-26.59,5.95-10.58,0-18.79-3.44-24.34-10.05-5.16-6.09-7.67-14.02-7.67-23.68,0-3.57.26-7.14.79-10.72.4-3.84,1.59-8.6,3.7-14.29,3.04-8.73,7.14-17.07,12.57-24.87,2.91-4.37,6.48-8.73,10.45-12.96,1.46-1.59,3.57-3.57,6.22-5.95,2.78-2.38,4.89-4.1,6.35-5.29,1.46-1.19,2.65-1.98,3.57-2.78.79-.66,1.59-1.19,2.38-1.72,1.46-1.19,2.25-1.85,2.25-2.38-.26-.66-1.46-1.19-3.97-1.72l-9.39-.53h-9.39c-.4,0-.93,0-1.19-.26.13-.26.26-.79.4-1.19.13-.53.4-.93.66-1.32.13-.79.66-1.98,1.72-3.7.13-.4.4-.53.53-.93.13-.26.26-.4.53-.66.4-.66.66-1.19,1.06-1.72.4-.4.79-1.06,1.19-1.46,1.06-1.59,2.38-3.04,3.44-4.23,2.12-2.38,4.1-4.37,6.35-5.82,3.04-2.51,7.28-4.76,12.7-7.01,4.89-1.85,9.26-2.91,13.1-2.91,1.19,0,2.51.26,3.97.79.13.13.13.26.13.4v-.4c.66.4,1.59.79,2.91,1.32.93.53,1.72.79,2.25.79,1.59,0,2.91-.53,3.97-1.32.79-.66,2.12-2.25,3.7-4.5,2.78-4.63,4.63-7.28,5.29-7.94,2.51-2.78,5.03-4.23,7.81-4.23,1.32,0,2.51.53,3.44,1.46.66.93,1.19,1.32,1.46,1.32.66,0,1.46-.79,2.25-2.25.79-1.46,1.32-2.25,1.85-2.25.79,0,1.46.66,2.12,1.98.66,1.32.93,2.65.93,3.7,0,2.51-1.06,5.29-3.04,8.2-.4.66-.93,1.19-1.46,1.72h-.13c-.66,2.38-1.59,5.82-3.17,9.26-2.65,5.69-3.84,9.39-3.7,11.11,0,.4.93.93,2.78,1.85,1.85.79,2.78,2.38,2.78,4.89,0,1.46-.53,3.04-1.46,4.76-1.19,1.46-2.38,2.12-3.7,2.12-1.72,0-2.78-.66-3.31-2.12-.66-1.19-1.06-2.91-1.06-4.76,0-4.37,1.85-10.19,5.29-17.6,1.59-3.17,2.78-6.09,3.7-8.2-1.19.66-2.38.93-3.7.66-.53,0-1.46-.4-3.04-1.19-1.46-.79-2.78-1.32-4.23-1.32s-3.18,1.32-5.03,3.7c-2.25,3.17-3.84,5.42-4.89,6.88-3.04,4.1-6.61,6.22-10.58,6.22v-.26s-.13.13-.13.26c0,0-1.85-.66-5.56-1.98-2.12-.79-3.97-1.19-5.42-1.19-2.65,0-5.82.53-9.66,1.59-3.7.93-7.28,2.65-10.58,4.89-.53.26-1.72,1.19-3.04,2.78l-1.19,1.46-.79.79,13.36-.79c5.56,0,9.39.4,11.51.93,2.12.66,3.17,1.98,3.17,4.1,0,2.78-1.85,5.56-5.42,8.2-1.85.93-3.57,2.12-5.16,3.31-1.72,1.06-3.31,2.25-4.89,3.31-6.09,4.37-12.04,9.52-17.73,15.48-2.12,1.98-4.76,5.16-7.67,9.66-2.91,4.23-5.03,7.8-6.22,11.11-2.12,5.16-3.17,9-3.57,11.51-.4,2.12-.4,3.97-.4,5.42,0,11.11,3.57,19.18,10.98,24.21,6.09,3.84,14.02,5.69,23.95,5.69,7.54,0,14.42-1.19,20.77-3.57,3.31-1.32,7.14-3.31,11.38-6.09,5.16-3.31,9.53-7.01,13.63-11.24,2.38-2.91,5.16-6.48,8.2-10.45,3.44-5.29,5.56-7.8,6.22-7.41Z"/><path d="M18.56,582.77l-.04-13.26,5.63.26c1.18-.03,67.5-.85,82.45-33.19l1.43-3.11,321.89-.56c8.37,0,15.18,6.8,15.19,15.14l.03,17.61c0,4.37-1.69,8.49-4.77,11.59-3.09,3.09-7.19,4.81-11.56,4.81l-410.24.71ZM114.74,544.19c-7.89,13.88-23.22,22.44-39.07,27.75l353.12-.61c1.5-.01,2.92-.59,3.98-1.67,1.06-1.06,1.65-2.48,1.64-3.98l-.03-17.61c0-2.45-2-4.44-4.45-4.44l-315.18.56Z"/></g></svg>
+        <h3 data-key="trad_nastaliq">Traditional Nastaliq</h3>
+        <p data-key="trad_nastaliq_desc">Reed pen · Classical rules · Ink on paper</p>
+      </div>
+      <div class="card" style="padding:1rem;text-align:center;">
+        <svg width="54" height="54" viewBox="0 0 54 54" style="margin-bottom:.5rem;">
+          <rect x="2" y="2" width="50" height="36" rx="3" fill="none" stroke="#c9a84c" stroke-width="2"/>
+          <g transform="translate(21,7) scale(0.022)">
+            <path fill="#c9a84c" d="M522.21,425.07c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path fill="#c9a84c" d="M522.21,307.32c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path fill="#c9a84c" d="M313.5,551.69c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path fill="#c9a84c" d="M361.06,422.85c0,13.27-6.64,29.31-18.8,48.66-12.16,18.8-21.01,28.2-26.54,28.2-3.87,0-10.51-4.42-18.25-13.27-11.61-12.17-21.01-21.57-28.2-27.09-18.25,39.81-32.63,59.17-43.69,59.17-2.21,0-11.06-6.09-26.54-19.36-15.48-13.27-23.22-21.01-23.22-23.22,0-4.42,7.19-20.46,21.01-48.66,14.37-27.65,23.22-42.03,26.54-42.03,5.53,0,14.38,5.53,25.99,16.03,11.61,9.96,19.36,19.91,23.23,28.75,7.19-12.72,14.37-24.88,21.01-36.49,9.95-17.69,16.03-25.99,18.25-25.99,8.3,0,18.25,6.08,30.41,17.69,12.17,13.82,18.8,26.54,18.8,37.6Z"/><path fill="#c9a84c" d="M513.44,502.53c1.93,0,1.93,3.85-.64,11.55-1.92,5.14-7.06,16.69-16.04,36.58-13.48,24.39-27.6,48.13-41.71,69.32-23.75,34.66-51.34,64.82-81.51,90.49-28.88,25.67-58.4,45.57-89.21,60.97-39.79,19.25-82.79,28.88-129,28.88-51.34,0-91.13-16.69-118.09-48.78C12.19,722.02,0,683.51,0,636.66c0-17.33,1.28-34.66,3.85-51.99,1.93-18.61,7.7-41.72,17.97-69.32,14.76-42.36,34.66-82.79,60.97-120.66,14.12-21.18,31.45-42.36,50.7-62.89,7.06-7.7,17.33-17.33,30.16-28.88,13.48-11.55,23.75-19.9,30.81-25.67,7.06-5.77,12.83-9.62,17.33-13.48,3.85-3.21,7.7-5.78,11.55-8.34,7.06-5.78,10.91-8.99,10.91-11.55-1.28-3.21-7.06-5.78-19.25-8.34l-45.57-2.57h-45.57c-1.92,0-4.49,0-5.77-1.28.64-1.28,1.28-3.85,1.92-5.78.64-2.57,1.93-4.49,3.21-6.42.64-3.85,3.21-9.63,8.34-17.97.64-1.92,1.93-2.57,2.57-4.49.64-1.28,1.28-1.92,2.57-3.21,1.93-3.21,3.21-5.77,5.14-8.34,1.92-1.92,3.85-5.13,5.77-7.06,5.14-7.7,11.55-14.76,16.69-20.54,10.27-11.55,19.9-21.18,30.81-28.24,14.76-12.19,35.3-23.1,61.61-34.01,23.75-8.99,44.93-14.12,63.54-14.12,5.78,0,12.19,1.28,19.26,3.85.64.64.64,1.28.64,1.93v-1.93c3.21,1.93,7.7,3.85,14.12,6.42,4.49,2.57,8.34,3.85,10.91,3.85,7.7,0,14.12-2.57,19.25-6.42,3.85-3.21,10.27-10.91,17.97-21.82,13.48-22.47,22.46-35.3,25.67-38.51,12.19-13.48,24.39-20.53,37.87-20.53,6.42,0,12.19,2.57,16.69,7.06,3.21,4.49,5.77,6.42,7.06,6.42,3.21,0,7.06-3.85,10.91-10.91,3.85-7.06,6.42-10.91,8.99-10.91,3.85,0,7.06,3.21,10.27,9.62,3.21,6.42,4.49,12.84,4.49,17.97,0,12.19-5.13,25.67-14.76,39.79-1.92,3.21-4.49,5.77-7.06,8.34h-.64c-3.21,11.55-7.7,28.24-15.4,44.93-12.84,27.6-18.61,45.57-17.97,53.91,0,1.93,4.49,4.49,13.48,8.99,8.99,3.85,13.48,11.55,13.48,23.75,0,7.06-2.57,14.76-7.06,23.1-5.77,7.06-11.55,10.27-17.97,10.27-8.34,0-13.48-3.21-16.04-10.27-3.21-5.77-5.14-14.12-5.14-23.1,0-21.18,8.99-49.42,25.67-85.36,7.7-15.4,13.48-29.52,17.97-39.79-5.77,3.21-11.55,4.49-17.97,3.21-2.57,0-7.06-1.92-14.76-5.77-7.06-3.85-13.48-6.42-20.53-6.42s-15.41,6.42-24.39,17.97c-10.91,15.4-18.61,26.31-23.75,33.37-14.76,19.9-32.09,30.16-51.35,30.16v-1.28s-.64.64-.64,1.28c0,0-8.99-3.21-26.96-9.63-10.27-3.85-19.25-5.77-26.31-5.77-12.84,0-28.24,2.57-46.85,7.7-17.97,4.49-35.3,12.84-51.34,23.75-2.57,1.28-8.34,5.78-14.76,13.48l-5.78,7.06-3.85,3.85,64.82-3.85c26.95,0,45.57,1.92,55.84,4.49,10.27,3.21,15.4,9.62,15.4,19.9,0,13.48-8.98,26.95-26.31,39.79-8.99,4.49-17.33,10.27-25.03,16.04-8.34,5.14-16.04,10.91-23.75,16.04-29.52,21.18-58.4,46.21-86,75.09-10.27,9.63-23.11,25.03-37.23,46.85-14.12,20.53-24.39,37.86-30.17,53.91-10.27,25.03-15.4,43.64-17.33,55.84-1.93,10.27-1.93,19.25-1.93,26.32,0,53.91,17.33,93.06,53.27,117.45,29.52,18.61,68.03,27.6,116.17,27.6,36.58,0,69.96-5.77,100.76-17.33,16.04-6.42,34.66-16.04,55.19-29.52,25.03-16.04,46.21-34.01,66.11-54.55,11.55-14.12,25.03-31.45,39.79-50.7,16.69-25.67,26.95-37.86,30.16-35.94Z"/>
+          </g>
+          <line x1="27" y1="38" x2="27" y2="44" stroke="#c9a84c" stroke-width="2" stroke-linecap="round"/>
+          <line x1="18" y1="44" x2="36" y2="44" stroke="#c9a84c" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <h3 data-key="dig_nastaliq">Digital Nastaliq</h3>
+        <p data-key="dig_nastaliq_desc">Stylus · Digital canvas · Contemporary design</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<div class="page" id="page-education">
+  <span class="section-title" data-key="edu_title">Education Background</span>
+  <div class="card"><h3 data-key="edu1_title">Bachelor's in International Relations</h3><div class="meta">Selçuk University, Konya, Turkey · 2019 – 2023</div><p data-key="edu1_desc">Double major program. Focus on conflict resolution, social values, and migration studies. Research project: <em>"The Impact of Migrants' Social Values on the Integration Process."</em></p><div class="tags"><span class="tag accent">Conflict Resolution</span><span class="tag accent">Migration</span><span class="tag accent">Social Values</span></div></div>
+  <div class="card"><h3 data-key="edu2_title">Bachelor's in Sociology</h3><div class="meta">Selçuk University, Konya, Turkey · 2018 – 2022</div><p data-key="edu2_desc">Specialization in the analysis of social values, conflicts, and migration. Bachelor's thesis: <em>"The Impacts of Ethnic, Political, and Religious Value Differences on the Conflicts in Afghanistan."</em></p><div class="tags"><span class="tag accent">Social Theory</span><span class="tag accent">Ethnicity & Conflict</span><span class="tag accent">Afghanistan Studies</span></div></div>
+  <div class="card"><h3 data-key="edu3_title">German Language & Data Analysis Courses</h3><div class="meta">Göttingen, Germany · 2023 – Present</div><p data-key="edu3_desc">Currently advancing German language skills from B2+ toward C1 and beyond, alongside data analysis coursework — preparing for postgraduate studies in sociology.</p><div class="tags"><span class="tag">German B2+ → C1</span><span class="tag accent" data-key="tag_inprogress">In Progress</span><span class="tag">Data Analysis</span></div></div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="page" id="page-experience">
+  <span class="section-title" data-key="exp_title">Practical Experience</span>
+  <div class="card"><h3 data-key="exp1_title">Intern — Research Assistant</h3><div class="meta">Georg-August-Universität Göttingen · Aug 01 – Oct 15, 2023</div><p data-key="exp1_desc">Research assistance on conflicts in Afghanistan. Prepared a research proposal on Immigrants' Social Value Orientations and presented it to the Chair of Development Economics.</p><div class="tags"><span class="tag accent">Research Proposal</span><span class="tag accent">Afghanistan Studies</span><span class="tag accent">Social Values</span><span class="tag accent">Erasmus+</span></div></div>
+  <div class="card"><h3 data-key="exp2_title">Field Researcher</h3><div class="meta">RMTeam & DRC · Jul 29 – Aug 28, 2022</div><p data-key="exp2_desc">Conducted surveys with beneficiaries, checked data quality, supported overall monitoring of program activities, and participated in implementing monitoring plans in the coverage area.</p><div class="tags"><span class="tag accent">Survey Research</span><span class="tag accent">Data Quality</span><span class="tag accent">Monitoring</span></div></div>
+  <div class="card"><h3 data-key="exp3_title">Intern — Data & Research</h3><div class="meta">National Institute of Planning (NIP) · Jul 20 – Sep 20, 2020</div><p data-key="exp3_desc">Designed research proposals, conducted surveys and data collection, and analyzed data using Excel and SPSS.</p><div class="tags"><span class="tag accent">SPSS</span><span class="tag accent">Excel</span><span class="tag accent">Survey Design</span></div></div>
+  <div class="card"><h3 data-key="exp4_title">Student Representative</h3><div class="meta">Hazara Öğrenciler Kültür ve Dayanışma Derneği, Konya · Mar 2019 – Mar 2020</div><p data-key="exp4_desc">Assisted newly arriving students with accommodation and university registration. Organized cultural solidarity events and educational tours.</p><div class="tags"><span class="tag">Community Leadership</span><span class="tag">Cultural Events</span><span class="tag">Student Support</span></div></div>
+</div>
+
+<!-- CERTIFICATES -->
+<div class="page" id="page-certificates">
+  <span class="section-title" data-key="cert_title">Certificates</span>
+  <div class="grid-2">
+    <div class="card"><h3>100 Days of Code: The Complete Python Pro Bootcamp</h3><div class="meta">Udemy · February 27, 2026</div><p data-key="cert1_desc">56.5 hours of Python programming. Instructed by Dr. Angela Yu.</p><div class="tags"><span class="tag accent">Python</span><span class="tag accent">Udemy</span></div><a href="https://ude.my/UC-f00382b9-18c4-4dd3-9247-399b3756fd93" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>Python for Data Science, AI & Development</h3><div class="meta">IBM · Coursera · December 30, 2022</div><p data-key="cert2_desc">Python for data analysis, AI fundamentals, and development.</p><div class="tags"><span class="tag accent">Python</span><span class="tag accent">IBM</span></div><a href="https://coursera.org/verify/BGT4WEEDXTMH" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>Tools for Data Science</h3><div class="meta">IBM · Coursera · December 19, 2022</div><p data-key="cert3_desc">Key data science tools including Jupyter, GitHub, and Watson Studio.</p><div class="tags"><span class="tag accent">Jupyter</span><span class="tag accent">IBM</span></div><a href="https://coursera.org/verify/YZP5UC6GVHY2" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>SQL for Data Science</h3><div class="meta">UC Davis · Coursera · November 30, 2022</div><p data-key="cert4_desc">SQL for data retrieval, filtering, and database management.</p><div class="tags"><span class="tag accent">SQL</span><span class="tag accent">UC Davis</span></div><a href="https://coursera.org/verify/WZJTBA53JVP7" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>Quantitative Methods</h3><div class="meta">University of Amsterdam · Coursera · December 16, 2022</div><p data-key="cert5_desc">Statistical methods, survey design, and quantitative data analysis for social research.</p><div class="tags"><span class="tag accent">Statistics</span><span class="tag accent">UvA</span></div><a href="https://coursera.org/verify/XJHBUFUDKYMA" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>Qualitative Research Methods</h3><div class="meta">University of Amsterdam · Coursera · March 4, 2023</div><p data-key="cert6_desc">Thematic coding, interviewing, and qualitative data interpretation.</p><div class="tags"><span class="tag accent">Qualitative</span><span class="tag accent">UvA</span></div><a href="https://coursera.org/verify/UZCJPW4G74X3" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>Basic Statistics</h3><div class="meta">University of Amsterdam · Coursera · March 16, 2023</div><p data-key="cert7_desc">Descriptive and inferential statistics, probability, and hypothesis testing.</p><div class="tags"><span class="tag accent">Statistics</span><span class="tag accent">UvA</span></div><a href="https://coursera.org/verify/5X6ZGZ8FZKZT" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>An Intuitive Introduction to Probability</h3><div class="meta">University of Zurich · Coursera · March 14, 2023</div><p data-key="cert8_desc">Foundations of probability theory and its applications in statistics.</p><div class="tags"><span class="tag accent">Probability</span><span class="tag accent">UZH</span></div><a href="https://coursera.org/verify/8QP33JRNTEPV" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>Business Metrics for Data-Driven Companies</h3><div class="meta">Duke University · Coursera · December 1, 2022</div><p data-key="cert9_desc">Applying data analysis to business metrics and decision-making.</p><div class="tags"><span class="tag accent">Data Analysis</span><span class="tag accent">Duke</span></div><a href="https://coursera.org/verify/82H9TR3JHVHY" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>Brand Identity and Strategy</h3><div class="meta">IE Business School · Coursera · April 7, 2023</div><p data-key="cert10_desc">Building and managing brand identities and marketing strategies.</p><div class="tags"><span class="tag">Branding</span><span class="tag">IE Business School</span></div><a href="https://coursera.org/verify/2NQDSN7T2VA5" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>Types of Conflict</h3><div class="meta">UC Irvine · Coursera · April 9, 2023</div><p data-key="cert11_desc">Understanding conflict typologies and resolution strategies.</p><div class="tags"><span class="tag">Conflict Studies</span><span class="tag">UCI</span></div><a href="https://coursera.org/verify/FT889AFX89BT" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+    <div class="card"><h3>TOEFL Preparation Specialization</h3><div class="meta">UCI Division of Continuing Education · Coursera · March 12, 2023</div><p data-key="cert12_desc">3-course specialization covering TOEFL Reading, Listening, Speaking, Writing, and test-taking strategies.</p><div class="tags"><span class="tag">TOEFL</span><span class="tag">UCI</span></div><a href="https://coursera.org/verify/specialization/MPP92DJVU9RE" target="_blank" class="cert-link" data-key="view_cert">View Certificate ↗</a></div>
+  </div>
+</div>
+
+<!-- AWARDS -->
+<div class="page" id="page-awards">
+  <span class="section-title" data-key="awards_title">Awards & Honours</span>
+  <div class="card"><h3 data-key="award1_title">Turkish Government Scholarship (Sociology)</h3><span class="badge" data-key="award1_badge">Scholarship</span><div class="meta">Yurtdışı Türkler ve Akraba Topluluklar (YTB) · 2017</div><p data-key="award1_desc">Awarded a full Turkish government scholarship to pursue undergraduate studies in Sociology in Turkey.</p></div>
+  <div class="card"><h3 data-key="award2_title">High Achievement Scholarship — Üstün Başarı Bursu</h3><span class="badge" data-key="award2_badge">Honour</span><div class="meta">Yurtdışı Türkler ve Akraba Topluluklar (YTB) · 2021 – 2022</div><p data-key="award2_desc">Awarded for outstanding academic performance during undergraduate studies.</p></div>
+  <div class="card"><h3 data-key="award3_title">High Honor Student</h3><span class="badge" data-key="award3_badge">Honour</span><div class="meta">Selçuk University, Sociology Department · 2020 – 2021</div><p data-key="award3_desc">Recognized as a High Honor Student for exceptional academic achievement in the Sociology Department.</p></div>
+  <div class="card"><h3 data-key="award4_title">Erasmus+ Internship Program</h3><span class="badge" data-key="award4_badge">Award</span><div class="meta">Selçuk University & Georg-August-University Göttingen · 2023</div><p data-key="award4_desc">Selected for the Erasmus+ Internship Program to conduct research at Georg-August-Universität Göttingen, Germany.</p></div>
+  <div class="card"><h3 data-key="award5_title">Double Major Program Admission</h3><span class="badge" data-key="award5_badge">Achievement</span><div class="meta">Selçuk University · 2019</div><p data-key="award5_desc">Admitted to the competitive Double Major Program in International Relations alongside a full Sociology degree.</p></div>
+</div>
+
+<!-- SKILLS -->
+<div class="page" id="page-skills">
+  <span class="section-title" data-key="skills_personal">Personal Skills</span>
+  <div class="comp-grid" style="margin-bottom:2rem;">
+    <span class="comp-tag" data-key="sk1">Critical Thinking</span><span class="comp-tag" data-key="sk2">Creativity</span><span class="comp-tag" data-key="sk3">Empathy</span><span class="comp-tag" data-key="sk4">Time Management</span><span class="comp-tag" data-key="sk5">Teamwork</span><span class="comp-tag" data-key="sk6">Communication</span><span class="comp-tag" data-key="sk7">Problem Solving</span><span class="comp-tag" data-key="sk8">Leadership</span><span class="comp-tag" data-key="sk9">Responsibility</span><span class="comp-tag" data-key="sk10">Emotional Intelligence</span>
+  </div>
+  <span class="section-title" data-key="skills_computer">Computer Skills</span>
+  <div class="comp-grid" style="margin-bottom:2rem;margin-top:.8rem;">
+    <span class="comp-tag">Python</span><span class="comp-tag">SQL</span><span class="comp-tag">HTML</span><span class="comp-tag">CSS</span><span class="comp-tag">SPSS</span><span class="comp-tag">MAXQDA</span><span class="comp-tag">Tableau</span><span class="comp-tag">Jupyter Notebook</span><span class="comp-tag">Google Colab</span><span class="comp-tag">Adobe Photoshop</span><span class="comp-tag">Adobe Illustrator</span><span class="comp-tag">Adobe After Effects</span><span class="comp-tag">Adobe InDesign</span><span class="comp-tag">MS Office Suite</span>
+  </div>
+  <span class="section-title" data-key="skills_lang">Language Skills</span>
+  <div style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:1rem;">
+    <div style="text-align:center;"><svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="4"/><circle cx="40" cy="40" r="34" fill="none" stroke="#c9a84c" stroke-width="4" stroke-dasharray="214 214" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 40 40)"/><text x="40" y="44" text-anchor="middle" font-size="9" font-weight="600" fill="var(--primary)" font-family="Segoe UI,sans-serif" data-key="lang_native">Native</text></svg><div style="font-size:.82rem;font-weight:600;color:var(--primary);margin-top:.4rem;" data-key="lang_persian">Persian</div><div style="font-size:.75rem;color:var(--muted);" data-key="lang_native2">Native</div></div>
+    <div style="text-align:center;"><svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="4"/><circle cx="40" cy="40" r="34" fill="none" stroke="#c9a84c" stroke-width="4" stroke-dasharray="193 214" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 40 40)"/><text x="40" y="44" text-anchor="middle" font-size="11" font-weight="600" fill="var(--primary)" font-family="Segoe UI,sans-serif">C1+</text></svg><div style="font-size:.82rem;font-weight:600;color:var(--primary);margin-top:.4rem;" data-key="lang_turkish">Turkish</div><div style="font-size:.75rem;color:var(--muted);" data-key="lang_proficient">Proficient</div></div>
+    <div style="text-align:center;"><svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="4"/><circle cx="40" cy="40" r="34" fill="none" stroke="#c9a84c" stroke-width="4" stroke-dasharray="193 214" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 40 40)"/><text x="40" y="44" text-anchor="middle" font-size="11" font-weight="600" fill="var(--primary)" font-family="Segoe UI,sans-serif">C1+</text></svg><div style="font-size:.82rem;font-weight:600;color:var(--primary);margin-top:.4rem;" data-key="lang_english">English</div><div style="font-size:.75rem;color:var(--muted);" data-key="lang_proficient2">Proficient</div></div>
+    <div style="text-align:center;"><svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="4"/><circle cx="40" cy="40" r="34" fill="none" stroke="#c9a84c" stroke-width="4" stroke-dasharray="141 214" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 40 40)"/><text x="40" y="44" text-anchor="middle" font-size="11" font-weight="600" fill="var(--primary)" font-family="Segoe UI,sans-serif">B2+</text></svg><div style="font-size:.82rem;font-weight:600;color:var(--primary);margin-top:.4rem;" data-key="lang_german">German</div><div style="font-size:.75rem;color:var(--muted);" data-key="lang_upper">Upper Inter.</div></div>
+    <div style="text-align:center;"><svg width="80" height="80" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="none" stroke="var(--border)" stroke-width="4"/><circle cx="40" cy="40" r="34" fill="none" stroke="#c9a84c" stroke-width="4" stroke-dasharray="128 214" stroke-dashoffset="0" stroke-linecap="round" transform="rotate(-90 40 40)"/><text x="40" y="44" text-anchor="middle" font-size="11" font-weight="600" fill="var(--primary)" font-family="Segoe UI,sans-serif">B2</text></svg><div style="font-size:.82rem;font-weight:600;color:var(--primary);margin-top:.4rem;" data-key="lang_pashto">Pashto</div><div style="font-size:.75rem;color:var(--muted);" data-key="lang_upper2">Upper Inter.</div></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="page" id="page-projects">
+  <span class="section-title" data-key="proj_title">Projects</span>
+  <p style="color:var(--muted);margin-bottom:1.5rem;font-size:.92rem;" data-key="proj_intro">Select a category to explore my work.</p>
+  <div style="display:flex;gap:.8rem;margin-bottom:1.8rem;flex-wrap:wrap;">
+    <button onclick="switchTab('research')" id="tab-research" class="btn btn-primary" data-key="tab_research">Research</button>
+    <button onclick="switchTab('calligraphy')" id="tab-calligraphy" class="btn btn-outline" data-key="tab_calligraphy">Calligraphy</button>
+    <button onclick="switchTab('design')" id="tab-design" class="btn btn-outline" data-key="tab_design">Graphic Design</button>
+  </div>
+  <div id="tab-content-research">
+    <div class="proj-card" onclick="toggleAbstract('p1')"><div class="proj-header"><div><h3>Relational Polarization: Value Orientations and Immigration Attitudes in Germany</h3><div class="meta">Research Paper · European Social Survey · Ten Rounds</div><div class="tags"><span class="tag accent">Schwartz Value Theory</span><span class="tag accent">Polarization</span><span class="tag accent">Immigration Attitudes</span><span class="tag accent">ESS Data</span></div></div><span id="p1-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p1"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p>This study examines the relational structure of value orientations and their association with attitudes toward immigration in Germany using repeated cross-sectional data from ten rounds of the European Social Survey. Self-transcendence aligns with more positive attitudes toward immigrants, whereas conservation aligns with more negative ones. These patterns become more pronounced during periods of heightened societal contestation (2008, 2014, 2016).</p><p class="kw"><strong data-key="keywords">Keywords:</strong> Polarization; Immigration attitudes; Social values; Schwartz value theory; Simmel's theory of valuation; European Social Survey</p></div></div>
+    <div class="proj-card" onclick="toggleAbstract('p2')"><div class="proj-header"><div><h3>The Impacts of Ethnic, Political, and Religious Value Differences on the Conflicts in Afghanistan</h3><div class="meta">Bachelor's Thesis · Selçuk University, Sociology · 2022</div><div class="tags"><span class="tag accent">Integrative Literature Review</span><span class="tag accent">Sociology</span><span class="tag accent">Afghanistan</span><span class="tag accent">Conflict Studies</span></div></div><span id="p2-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p2"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p>The purpose of this study is to explore the impacts of ethnic, political, and religious value differences on the conflicts in Afghanistan using an integrative literature review. The lack of cross-cutting ties between ethnic groups' value systems combined with fraternal interest groups leads to violent conflicts.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> Value, Conflict, Cross-cutting ties, Fraternal interest group, Afghanistan</p></div></div>
+    <div class="proj-card" onclick="toggleAbstract('p3')"><div class="proj-header"><div><h3>The Impact of Artificial Intelligence (AI) on the Simulation Process: From Jean Baudrillard's Perspective</h3><div class="meta" data-key="coauthored">Co-authored with Ziwer Rasul</div><div class="tags"><span class="tag accent">Baudrillard</span><span class="tag accent">AI & Society</span><span class="tag accent">Simulation Theory</span><span class="tag accent">Hyperreality</span></div></div><span id="p3-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p3"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p>This study explores the impact of AI on the simulation process through Jean Baudrillard's theory. The findings reveal that AI marks a new phase in the evolution of simulation, transforming our consumer, political, and cultural behaviors.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> Artificial Intelligence, Simulacra, Simulation, Hyperreality, Consumption</p></div></div>
+    <div class="proj-card" onclick="toggleAbstract('p4')"><div class="proj-header"><div><h3>The Role of Immigrants' Social Value Orientations in Their Cultural Adaptation Process: A Phenomenology Study in Germany</h3><div class="meta">Research Proposal · Georg-August-Universität Göttingen · Erasmus+ · 2023</div><div class="tags"><span class="tag accent">Phenomenology</span><span class="tag accent">Migration Studies</span><span class="tag accent">MAXQDA</span><span class="tag accent">Qualitative Research</span></div></div><span id="p4-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p4"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p>This proposal outlines a qualitative phenomenological study exploring the role of immigrants' social value orientations in their cultural adaptation process. Semi-structured interview questions are based on Schwartz's value scale, Gordon's assimilation formulation, and Berry's acculturation strategies. Data will be collected from approximately 40 immigrants in Germany and analyzed using MAXQDA.</p></div></div>
+  </div>
+  <div id="tab-content-calligraphy" style="display:none;">
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;" data-key="calli_gallery_desc">A selection of Nastaliq calligraphy works — traditional and modern — in ink and digital media.</p>
+    <div id="calli-gallery" style="columns:2;gap:1rem;margin-top:.5rem;"></div>
+    <p id="calli-loading" style="color:var(--muted);font-size:.9rem;" data-key="loading">Loading gallery...</p>
+  </div>
+  <div id="tab-content-design" style="display:none;">
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;" data-key="design_gallery_desc">A selection of logo and graphic design projects.</p>
+    <div id="design-gallery" style="columns:2;gap:1rem;margin-top:.5rem;"></div>
+    <p id="design-loading" style="color:var(--muted);font-size:.9rem;" data-key="loading">Loading gallery...</p>
+  </div>
+  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" style="max-width:90vw;max-height:90vh;border-radius:8px;object-fit:contain;"/>
+  </div>
+</div>
+
+<!-- HOBBIES -->
+<div class="page" id="page-hobbies">
+  <span class="section-title" data-key="hobbies_title">Hobbies & Interests</span>
+  <div style="margin-top:1rem;">
+    <div class="hobby-item"><div class="hobby-icon"><svg viewBox="0 0 524.35 800.32" width="32" height="48" fill="#c9a84c"><path d="M522.21,425.07c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path d="M522.21,307.32c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path d="M313.5,551.69c-.55,12.16-6.08,27.65-17.14,45.34-11.61,17.14-19.36,25.99-23.23,25.99-2.76-.55-6.64-2.76-10.51-7.74-4.97-5.53-10.5-11.06-16.03-17.14-4.42-3.87-9.4-7.74-14.38-12.16-4.42-4.42-6.64-7.74-6.64-11.06s7.19-17.69,21.01-42.03c13.82-24.88,22.12-36.49,25.44-36.49,8.29,1.11,17.69,7.19,27.65,19.91,9.95,12.17,14.93,23.78,13.82,35.39Z"/><path d="M361.06,422.85c0,13.27-6.64,29.31-18.8,48.66-12.16,18.8-21.01,28.2-26.54,28.2-3.87,0-10.51-4.42-18.25-13.27-11.61-12.17-21.01-21.57-28.2-27.09-18.25,39.81-32.63,59.17-43.69,59.17-2.21,0-11.06-6.09-26.54-19.36-15.48-13.27-23.22-21.01-23.22-23.22,0-4.42,7.19-20.46,21.01-48.66,14.37-27.65,23.22-42.03,26.54-42.03,5.53,0,14.38,5.53,25.99,16.03,11.61,9.96,19.36,19.91,23.23,28.75,7.19-12.72,14.37-24.88,21.01-36.49,9.95-17.69,16.03-25.99,18.25-25.99,8.3,0,18.25,6.08,30.41,17.69,12.17,13.82,18.8,26.54,18.8,37.6Z"/><path d="M513.44,502.53c1.93,0,1.93,3.85-.64,11.55-1.92,5.14-7.06,16.69-16.04,36.58-13.48,24.39-27.6,48.13-41.71,69.32-23.75,34.66-51.34,64.82-81.51,90.49-28.88,25.67-58.4,45.57-89.21,60.97-39.79,19.25-82.79,28.88-129,28.88-51.34,0-91.13-16.69-118.09-48.78C12.19,722.02,0,683.51,0,636.66c0-17.33,1.28-34.66,3.85-51.99,1.93-18.61,7.7-41.72,17.97-69.32,14.76-42.36,34.66-82.79,60.97-120.66,14.12-21.18,31.45-42.36,50.7-62.89,7.06-7.7,17.33-17.33,30.16-28.88,13.48-11.55,23.75-19.9,30.81-25.67,7.06-5.77,12.83-9.62,17.33-13.48,3.85-3.21,7.7-5.78,11.55-8.34,7.06-5.78,10.91-8.99,10.91-11.55-1.28-3.21-7.06-5.78-19.25-8.34l-45.57-2.57h-45.57c-1.92,0-4.49,0-5.77-1.28.64-1.28,1.28-3.85,1.92-5.78.64-2.57,1.93-4.49,3.21-6.42.64-3.85,3.21-9.63,8.34-17.97.64-1.92,1.93-2.57,2.57-4.49.64-1.28,1.28-1.92,2.57-3.21,1.93-3.21,3.21-5.77,5.14-8.34,1.92-1.92,3.85-5.13,5.77-7.06,5.14-7.7,11.55-14.76,16.69-20.54,10.27-11.55,19.9-21.18,30.81-28.24,14.76-12.19,35.3-23.1,61.61-34.01,23.75-8.99,44.93-14.12,63.54-14.12,5.78,0,12.19,1.28,19.26,3.85.64.64.64,1.28.64,1.93v-1.93c3.21,1.93,7.7,3.85,14.12,6.42,4.49,2.57,8.34,3.85,10.91,3.85,7.7,0,14.12-2.57,19.25-6.42,3.85-3.21,10.27-10.91,17.97-21.82,13.48-22.47,22.46-35.3,25.67-38.51,12.19-13.48,24.39-20.53,37.87-20.53,6.42,0,12.19,2.57,16.69,7.06,3.21,4.49,5.77,6.42,7.06,6.42,3.21,0,7.06-3.85,10.91-10.91,3.85-7.06,6.42-10.91,8.99-10.91,3.85,0,7.06,3.21,10.27,9.62,3.21,6.42,4.49,12.84,4.49,17.97,0,12.19-5.13,25.67-14.76,39.79-1.92,3.21-4.49,5.77-7.06,8.34h-.64c-3.21,11.55-7.7,28.24-15.4,44.93-12.84,27.6-18.61,45.57-17.97,53.91,0,1.93,4.49,4.49,13.48,8.99,8.99,3.85,13.48,11.55,13.48,23.75,0,7.06-2.57,14.76-7.06,23.1-5.77,7.06-11.55,10.27-17.97,10.27-8.34,0-13.48-3.21-16.04-10.27-3.21-5.77-5.14-14.12-5.14-23.1,0-21.18,8.99-49.42,25.67-85.36,7.7-15.4,13.48-29.52,17.97-39.79-5.77,3.21-11.55,4.49-17.97,3.21-2.57,0-7.06-1.92-14.76-5.77-7.06-3.85-13.48-6.42-20.53-6.42s-15.41,6.42-24.39,17.97c-10.91,15.4-18.61,26.31-23.75,33.37-14.76,19.9-32.09,30.16-51.35,30.16v-1.28s-.64.64-.64,1.28c0,0-8.99-3.21-26.96-9.63-10.27-3.85-19.25-5.77-26.31-5.77-12.84,0-28.24,2.57-46.85,7.7-17.97,4.49-35.3,12.84-51.34,23.75-2.57,1.28-8.34,5.78-14.76,13.48l-5.78,7.06-3.85,3.85,64.82-3.85c26.95,0,45.57,1.92,55.84,4.49,10.27,3.21,15.4,9.62,15.4,19.9,0,13.48-8.98,26.95-26.31,39.79-8.99,4.49-17.33,10.27-25.03,16.04-8.34,5.14-16.04,10.91-23.75,16.04-29.52,21.18-58.4,46.21-86,75.09-10.27,9.63-23.11,25.03-37.23,46.85-14.12,20.53-24.39,37.86-30.17,53.91-10.27,25.03-15.4,43.64-17.33,55.84-1.93,10.27-1.93,19.25-1.93,26.32,0,53.91,17.33,93.06,53.27,117.45,29.52,18.61,68.03,27.6,116.17,27.6,36.58,0,69.96-5.77,100.76-17.33,16.04-6.42,34.66-16.04,55.19-29.52,25.03-16.04,46.21-34.01,66.11-54.55,11.55-14.12,25.03-31.45,39.79-50.7,16.69-25.67,26.95-37.86,30.16-35.94Z"/></svg></div><div><strong data-key="hob1_title">Nastaliq Calligraphy</strong><p style="color:var(--muted);font-size:.88rem;margin-top:.2rem;" data-key="hob1_desc">Practicing traditional and modern Nastaliq calligraphy — a meditative discipline that connects me to my cultural roots and creative identity.</p></div></div>
+    <div class="hobby-item"><div class="hobby-icon"><svg viewBox="0 0 90 90" width="40" height="40" fill="none" stroke="#c9a84c" stroke-linecap="round" stroke-linejoin="round"><path d="M45,75 L45,15 C31,9 15,13 10,21 L10,77 C15,69 31,65 45,75Z" stroke-width="1.8"/><path d="M45,75 L45,15 C59,9 75,13 80,21 L80,77 C75,69 59,65 45,75Z" stroke-width="1.8"/><line x1="18" y1="28" x2="38" y2="24" stroke-width="1.1" opacity="0.7"/><line x1="18" y1="36" x2="38" y2="32" stroke-width="1.1" opacity="0.7"/><line x1="18" y1="44" x2="38" y2="40" stroke-width="1.1" opacity="0.5"/><line x1="52" y1="24" x2="72" y2="28" stroke-width="1.1" opacity="0.7"/><line x1="52" y1="32" x2="72" y2="36" stroke-width="1.1" opacity="0.7"/><line x1="52" y1="40" x2="72" y2="44" stroke-width="1.1" opacity="0.5"/></svg></div><div><strong data-key="hob2_title">Reading & Philosophy</strong><p style="color:var(--muted);font-size:.88rem;margin-top:.2rem;" data-key="hob2_desc">Avid reader of Kafka, Dostoevsky, Hedayat, Sartre, and Camus — exploring the intersection of philosophy, literature, and social reality.</p></div></div>
+    <div class="hobby-item"><div class="hobby-icon"><svg viewBox="0 0 658.4 592.96" width="36" height="32" fill="#c9a84c"><g><path d="M56.23,337.39h-10.38v-18.03h10.38v18.03ZM56.23,301.33h-10.38v-18.03h10.38v18.03ZM56.23,265.27h-10.38v-18.03h10.38v18.03ZM56.23,229.21h-10.38v-18.03h10.38v18.03ZM56.23,193.15h-10.38v-18.03h10.38v18.03ZM56.23,157.08h-10.38v-18.03h10.38v18.03ZM56.23,121.03h-10.38v-18.03h10.38v18.03Z"/><path d="M612.59,330.32h-10.38v-18.03h10.38v18.03ZM612.59,294.25h-10.38v-18.03h10.38v18.03ZM612.59,258.19h-10.38v-18.03h10.38v18.03ZM612.59,222.13h-10.38v-18.03h10.38v18.03ZM612.59,186.07h-10.38v-18.03h10.38v18.03ZM612.59,150.01h-10.38v-18.03h10.38v18.03ZM612.59,113.95h-10.38v-18.03h10.38v18.03Z"/></g><g><path d="M516.39,260.82h-89.66c-7.26,0-13.16-5.91-13.16-13.16v-89.66c0-7.26,5.91-13.16,13.16-13.16h89.66c7.26,0,13.17,5.91,13.17,13.16v89.66c0,7.26-5.91,13.16-13.17,13.16ZM426.73,155.22c-1.53,0-2.78,1.25-2.78,2.78v89.66c0,1.53,1.25,2.78,2.78,2.78h89.66c1.54,0,2.78-1.25,2.78-2.78v-89.66c0-1.53-1.25-2.78-2.78-2.78h-89.66Z"/><path d="M329.99,263.8c-33.62,0-60.98-27.35-60.98-60.97s27.35-60.98,60.98-60.98,60.97,27.35,60.97,60.98-27.35,60.97-60.97,60.97ZM329.99,152.24c-27.89,0-50.59,22.7-50.59,50.59s22.7,50.59,50.59,50.59,50.59-22.69,50.59-50.59-22.69-50.59-50.59-50.59Z"/><path d="M228.4,255.76h-81.52c-6.1,0-11.56-3.15-14.6-8.43s-3.05-11.58,0-16.86l40.76-70.6c3.05-5.28,8.51-8.43,14.6-8.43s11.56,3.15,14.6,8.43l40.76,70.6c3.05,5.28,3.05,11.58,0,16.86s-8.51,8.43-14.6,8.43ZM187.64,161.82c-1.13,0-3.92.31-5.61,3.24l-40.76,70.6c-1.69,2.92-.56,5.5,0,6.48.56.97,2.23,3.24,5.61,3.24h81.52c3.38,0,5.05-2.27,5.61-3.24.56-.97,1.69-3.55,0-6.48l-40.76-70.6c-1.69-2.93-4.48-3.24-5.61-3.24Z"/></g><g><g><path d="M597.69,530.09c-2.87,0-5.19-2.32-5.19-5.19v-8.69c0-2.87,2.32-5.19,5.19-5.19s5.19,2.32,5.19,5.19v8.69c0,2.87-2.32,5.19-5.19,5.19Z"/><path d="M597.69,590.01c-19.38,0-35.14-15.76-35.14-35.14v-32.84c0-19.38,15.76-35.14,35.14-35.14s35.14,15.76,35.14,35.14v32.84c0,19.38-15.76,35.14-35.14,35.14ZM597.69,497.29c-13.65,0-24.75,11.1-24.75,24.75v32.84c0,13.65,11.1,24.75,24.75,24.75s24.76-11.1,24.76-24.75v-32.84c0-13.65-11.1-24.75-24.76-24.75Z"/></g><path d="M500.83,592.96H41.78c-8.92,0-16.18-7.26-16.18-16.18v-76.64c0-8.92,7.26-16.18,16.18-16.18h459.06c8.92,0,16.18,7.26,16.18,16.18v76.64c0,8.92-7.26,16.18-16.18,16.18ZM41.78,494.34c-3.19,0-5.79,2.6-5.79,5.79v76.64c0,3.19,2.6,5.79,5.79,5.79h459.06c3.19,0,5.79-2.6,5.79-5.79v-76.64c0-3.19-2.6-5.79-5.79-5.79H41.78Z"/></g><path d="M653.21,431.29h-318.82v-29.91h256.09c37.07,0,67.29-30.22,67.29-67.29V67.29c0-37.07-30.22-67.29-67.29-67.29H67.92C30.84,0,.73,30.22.73,67.29v266.79c0,37.07,30.12,67.29,67.19,67.29h256.09v29.91H5.19c-2.8,0-5.19,2.39-5.19,5.19s2.39,5.19,5.19,5.19h648.02c2.91,0,5.19-2.29,5.19-5.19s-2.28-5.19-5.19-5.19ZM67.92,390.99c-31.36,0-56.81-25.55-56.81-56.91V67.29c0-31.36,25.44-56.91,56.81-56.91h522.57c31.36,0,56.91,25.55,56.91,56.91v266.79c0,31.36-25.55,56.91-56.91,56.91H67.92Z"/></svg></div><div><strong data-key="hob3_title">Graphic Design & Digital Art</strong><p style="color:var(--muted);font-size:.88rem;margin-top:.2rem;" data-key="hob3_desc">Creating visual narratives through design — from brand identities to infographics that give data a human face.</p></div></div>
+    <div class="hobby-item"><div class="hobby-icon"><svg viewBox="0 0 90 90" width="40" height="40" fill="none" stroke="#c9a84c" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="52" height="68" rx="3" stroke-width="1.5"/><path d="M52,6 L60,14 L52,14 Z" stroke-width="1.2" fill="none"/><path d="M16,26 C22,22 30,28 36,24 C42,20 48,26 54,24" stroke-width="1.1" fill="none" opacity="0.7"/><path d="M16,36 C22,32 30,38 38,34 C44,30 50,36 56,34" stroke-width="1.1" fill="none" opacity="0.7"/><path d="M16,46 C24,42 32,48 40,44 C46,40 50,46 54,44" stroke-width="1.1" fill="none" opacity="0.55"/><path d="M16,56 C22,52 30,58 38,54" stroke-width="1.2" fill="none"/><g transform="translate(38,54) rotate(40)"><rect x="-3" y="-34" width="6" height="28" rx="3" stroke-width="1.4"/><path d="M-3,-34 Q0,-40 3,-34" stroke-width="1.3" fill="none"/><line x1="-3" y1="-10" x2="3" y2="-10" stroke-width="1.4"/><path d="M-2,2 Q0,12 2,2" stroke-width="1.4" fill="none"/><line x1="0" y1="5" x2="0" y2="12" stroke-width="0.8" opacity="0.8"/><ellipse cx="0" cy="13" rx="1.5" ry="2" fill="#c9a84c"/></g></svg></div><div><strong data-key="hob4_title">Poetry Writing</strong><p style="color:var(--muted);font-size:.88rem;margin-top:.2rem;" data-key="hob4_desc">Poetry was my first language for processing the world — a creative outlet that still informs how I approach sociological inquiry.</p></div></div>
+    <div class="hobby-item"><div class="hobby-icon"><svg viewBox="0 0 90 90" width="40" height="40" fill="none" stroke="#c9a84c" stroke-linecap="round" stroke-linejoin="round"><circle cx="45" cy="48" r="30" stroke-width="1.8"/><ellipse cx="45" cy="48" rx="14" ry="30" stroke-width="1.3"/><line x1="15" y1="48" x2="75" y2="48" stroke-width="1.3"/><path d="M20,34 Q45,28 70,34" stroke-width="1" fill="none"/><path d="M20,62 Q45,68 70,62" stroke-width="1" fill="none"/><circle cx="45" cy="14" r="6" stroke-width="1.5" fill="none"/><circle cx="45" cy="14" r="2.5" fill="#c9a84c" stroke="none"/><path d="M40,19 Q45,26 50,19" stroke-width="1.3" fill="none"/></svg></div><div><strong data-key="hob5_title">Cultural Exploration & Travel</strong><p style="color:var(--muted);font-size:.88rem;margin-top:.2rem;" data-key="hob5_desc">Having lived in Afghanistan, Turkey, and Germany, I am passionate about understanding diverse cultures, languages, and worldviews firsthand.</p></div></div>
+    <div class="hobby-item"><div class="hobby-icon"><svg viewBox="0 0 90 90" width="40" height="40" fill="none" stroke="#c9a84c" stroke-linecap="round" stroke-linejoin="round"><line x1="14" y1="72" x2="14" y2="14" stroke-width="1.6"/><line x1="14" y1="72" x2="76" y2="72" stroke-width="1.6"/><polyline points="20,60 34,36 48,50 62,22 76,38" stroke-width="2.2" stroke-linejoin="round" fill="none"/><circle cx="20" cy="60" r="3" fill="#c9a84c" stroke="none"/><circle cx="34" cy="36" r="3" fill="#c9a84c" stroke="none"/><circle cx="48" cy="50" r="3" fill="#c9a84c" stroke="none"/><circle cx="62" cy="22" r="3" fill="#c9a84c" stroke="none"/><circle cx="76" cy="38" r="3" fill="#c9a84c" stroke="none"/></svg></div><div><strong data-key="hob6_title">Data Storytelling</strong><p style="color:var(--muted);font-size:.88rem;margin-top:.2rem;" data-key="hob6_desc">Turning raw datasets into compelling visual narratives — making complexity accessible without reducing it.</p></div></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="page-contact">
+  <span class="section-title" data-key="contact_title">Contact</span>
+  <div style="margin-top:1rem;max-width:520px;">
+    <div class="contact-info card">
+      <h3 style="color:var(--primary);margin-bottom:1rem;" data-key="get_in_touch">Get in Touch</h3>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2,7 L12,13 L22,7"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);" data-key="lbl_email">Email</div><div style="font-size:.9rem;">abdulhadikomail@gmail.com</div></div></div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6,2 C5,2 3,3 3,5 C3,13 11,21 19,21 C21,21 22,19 22,18 L19,15 C18,14 17,14 16,15 L15,16 C14,17 12,16 10,14 C8,12 7,10 8,9 L9,8 C10,7 10,6 9,5 Z"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);" data-key="lbl_phone">Phone</div><div style="font-size:.9rem;">(+49) 1764 1660001</div></div></div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 C8,2 5,5 5,9 C5,15 12,22 12,22 C12,22 19,15 19,9 C19,5 16,2 12,2Z"/><circle cx="12" cy="9" r="3"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);" data-key="lbl_address">Address</div><div style="font-size:.9rem;">Carl-Giesecke-Straße 6, Göttingen, 37079, Germany</div></div></div>
+      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><line x1="7" y1="10" x2="7" y2="17"/><line x1="7" y1="7" x2="7" y2="7.5" stroke-width="2.5"/><line x1="11" y1="10" x2="11" y2="17"/><path d="M11,13 C11,11 12.5,10 14,10 C15.5,10 17,11 17,13 L17,17"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);">LinkedIn</div><div style="font-size:.9rem;">linkedin.com/in/abdulhadi-komail</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- LANGUAGE SWITCHER -->
+<div class="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('en',event)">🇬🇧 English</button>
+  <button class="lang-btn" onclick="setLang('de',event)">🇩🇪 Deutsch</button>
+  <button class="lang-btn" onclick="setLang('tr',event)">🇹🇷 Türkçe</button>
+</div>
+
+<script>
+const pages=['home','insight','expression','education','experience','certificates','awards','skills','projects','hobbies','contact'];
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  const i=pages.indexOf(id);
+  if(i>=0) document.querySelectorAll('.nav-links button')[i].classList.add('active');
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo(0,0);
+}
+function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');}
+function toggleAbstract(id){
+  const body=document.getElementById(id);
+  const arrow=document.getElementById(id+'-arrow');
+  const open=body.style.display==='block';
+  body.style.display=open?'none':'block';
+  arrow.textContent=open?'▼':'▲';
+}
+function switchTab(tab){
+  ['research','calligraphy','design'].forEach(t=>{
+    document.getElementById('tab-content-'+t).style.display=t===tab?'block':'none';
+    document.getElementById('tab-'+t).className='btn '+(t===tab?'btn-primary':'btn-outline');
+  });
+  if(tab==='calligraphy') loadGallery('calligraphy');
+  if(tab==='design') loadGallery('design');
+}
+function openLightbox(src){
+  const lb=document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src=src;
+  lb.style.display='flex';
+}
+function closeLightbox(){document.getElementById('lightbox').style.display='none';}
+const galleryLoaded={calligraphy:false,design:false};
+const galleryConfig={
+  calligraphy:{folder:'calligraphy',galleryId:'calli-gallery',loadingId:'calli-loading'},
+  design:{folder:'logos',galleryId:'design-gallery',loadingId:'design-loading'}
+};
+function loadGallery(type){
+  if(galleryLoaded[type]) return;
+  galleryLoaded[type]=true;
+  const cfg=galleryConfig[type];
+  fetch(`https://api.github.com/repos/mngol-01/portfolio/contents/${cfg.folder}`)
+    .then(r=>r.json())
+    .then(files=>{
+      const gallery=document.getElementById(cfg.galleryId);
+      const loading=document.getElementById(cfg.loadingId);
+      const imgs=files.filter(f=>/\.(jpg|jpeg|png|gif|webp)$/i.test(f.name));
+      if(!imgs.length){loading.style.display='none';return;}
+      loading.style.display='none';
+      imgs.forEach(f=>{
+        const rawUrl=`https://raw.githubusercontent.com/mngol-01/portfolio/main/${cfg.folder}/${f.name}`;
+        const wrap=document.createElement('div');
+        wrap.style.cssText='break-inside:avoid;margin-bottom:1rem;cursor:pointer;';
+        wrap.onclick=()=>openLightbox(rawUrl);
+        const img=document.createElement('img');
+        img.src=rawUrl;img.loading='lazy';
+        img.style.cssText='width:100%;border-radius:10px;border:1px solid var(--border);display:block;';
+        img.onerror=()=>wrap.remove();
+        wrap.appendChild(img);
+        gallery.appendChild(wrap);
+      });
+    })
+    .catch(()=>{document.getElementById(cfg.loadingId).style.display='none';});
+}
+
+const translations={
+  en:{
+    nav_profile:'Profile',nav_insight:'Insight',nav_expression:'Expression',
+    nav_education:'Education',nav_experience:'Experience',nav_certificates:'Certificates',
+    nav_awards:'Awards',nav_skills:'Skills',nav_projects:'Projects',
+    nav_hobbies:'Hobbies',nav_contact:'Contact',
+    hero_subtitle:'Sociologist · Data Analyst · Calligrapher & Graphic Designer',
+    hero_bio:'In a world that reduces human experience to data and algorithms, I use data, design, and code to explore its complexity instead of simplifying it. With a background in sociology and international relations, I see digital tools as just one limited but useful way to approach the complexity of human nature.',
+    btn_contact:'Get in Touch',
+    glance_title:'At a Glance',
+    glance_research:'Research Methods',glance_research_sub:'Qualitative<br>Quantitative<br>Mixed Methods',
+    glance_data:'Data Analysis',
+    glance_calli:'Calligraphy',glance_calli_sub:'Nastaliq<br>Traditional<br>Digital',
+    glance_design:'Graphic Designing',glance_design_sub:'Logo<br>Infograph<br>Data Visualization',
+    insight_title:'Insight — Research & Data Analysis',
+    insight_intro:'My research expertise bridges qualitative and quantitative methodologies, supported by hands-on experience with modern data analysis tools and academic research environments.',
+    qual_title:'Qualitative Methods',qual_desc:'Thematic coding, MAXQDA for analysis, survey design and execution, academic literature review, mixed-methods integration, and field research.',
+    quant_title:'Quantitative Methods',quant_desc:'Descriptive and inferential statistics, hypothesis testing, survey-based research, data cleaning and analysis using Python, SPSS, SQL, Excel, and Tableau.',
+    tools_title:'Data Analysis Tools',
+    expr_title:'Expression — Design & Calligraphy',
+    expr_intro:"My creative journey began with poetry and calligraphy as a response to witnessing hardship — a need to process the world through art before I had the language of social science to do so.",
+    expr_gd:'Graphic Design',expr_gd_desc:'Creating compelling visual identities, digital artwork, infographics, data storytelling visuals, and motion graphics using the Adobe Creative Suite.',
+    ps_desc:'Editing & composition',ai_desc:'Vector graphics & branding',ae_desc:'Motion graphics & animation',
+    tag_infographic:'Infographic Design',tag_datastory:'Data Storytelling',tag_branding:'Branding Assets',tag_layout:'Visual Layout',
+    expr_calli:'Nastaliq Calligraphy',expr_calli_desc:'Practiced in the classical Nastaliq script — one of the most refined forms of Perso-Arabic calligraphy — across traditional and contemporary digital styles.',
+    trad_nastaliq:'Traditional Nastaliq',trad_nastaliq_desc:'Reed pen · Classical rules · Ink on paper',
+    dig_nastaliq:'Digital Nastaliq',dig_nastaliq_desc:'Stylus · Digital canvas · Contemporary design',
+    edu_title:'Education Background',
+    edu1_title:"Bachelor's in International Relations",edu1_desc:'Double major program. Focus on conflict resolution, social values, and migration studies. Research project: <em>"The Impact of Migrants\' Social Values on the Integration Process."</em>',
+    edu2_title:"Bachelor's in Sociology",edu2_desc:'Specialization in the analysis of social values, conflicts, and migration. Bachelor\'s thesis: <em>"The Impacts of Ethnic, Political, and Religious Value Differences on the Conflicts in Afghanistan."</em>',
+    edu3_title:'German Language & Data Analysis Courses',edu3_desc:'Currently advancing German language skills from B2+ toward C1 and beyond, alongside data analysis coursework — preparing for postgraduate studies in sociology.',
+    tag_inprogress:'In Progress',
+    exp_title:'Practical Experience',
+    exp1_title:'Intern — Research Assistant',exp1_desc:'Research assistance on conflicts in Afghanistan. Prepared a research proposal on Immigrants\' Social Value Orientations and presented it to the Chair of Development Economics.',
+    exp2_title:'Field Researcher',exp2_desc:'Conducted surveys with beneficiaries, checked data quality, supported overall monitoring of program activities, and participated in implementing monitoring plans in the coverage area.',
+    exp3_title:'Intern — Data & Research',exp3_desc:'Designed research proposals, conducted surveys and data collection, and analyzed data using Excel and SPSS.',
+    exp4_title:'Student Representative',exp4_desc:'Assisted newly arriving students with accommodation and university registration. Organized cultural solidarity events and educational tours.',
+    cert_title:'Certificates',view_cert:'View Certificate ↗',
+    cert1_desc:'56.5 hours of Python programming. Instructed by Dr. Angela Yu.',
+    cert2_desc:'Python for data analysis, AI fundamentals, and development.',
+    cert3_desc:'Key data science tools including Jupyter, GitHub, and Watson Studio.',
+    cert4_desc:'SQL for data retrieval, filtering, and database management.',
+    cert5_desc:'Statistical methods, survey design, and quantitative data analysis for social research.',
+    cert6_desc:'Thematic coding, interviewing, and qualitative data interpretation.',
+    cert7_desc:'Descriptive and inferential statistics, probability, and hypothesis testing.',
+    cert8_desc:'Foundations of probability theory and its applications in statistics.',
+    cert9_desc:'Applying data analysis to business metrics and decision-making.',
+    cert10_desc:'Building and managing brand identities and marketing strategies.',
+    cert11_desc:'Understanding conflict typologies and resolution strategies.',
+    cert12_desc:'3-course specialization covering TOEFL Reading, Listening, Speaking, Writing, and test-taking strategies.',
+    awards_title:'Awards & Honours',
+    award1_title:'Turkish Government Scholarship (Sociology)',award1_badge:'Scholarship',award1_desc:'Awarded a full Turkish government scholarship to pursue undergraduate studies in Sociology in Turkey.',
+    award2_title:'High Achievement Scholarship — Üstün Başarı Bursu',award2_badge:'Honour',award2_desc:'Awarded for outstanding academic performance during undergraduate studies.',
+    award3_title:'High Honor Student',award3_badge:'Honour',award3_desc:'Recognized as a High Honor Student for exceptional academic achievement in the Sociology Department.',
+    award4_title:'Erasmus+ Internship Program',award4_badge:'Award',award4_desc:'Selected for the Erasmus+ Internship Program to conduct research at Georg-August-Universität Göttingen, Germany.',
+    award5_title:'Double Major Program Admission',award5_badge:'Achievement',award5_desc:'Admitted to the competitive Double Major Program in International Relations alongside a full Sociology degree.',
+    skills_personal:'Personal Skills',skills_computer:'Computer Skills',skills_lang:'Language Skills',
+    sk1:'Critical Thinking',sk2:'Creativity',sk3:'Empathy',sk4:'Time Management',sk5:'Teamwork',sk6:'Communication',sk7:'Problem Solving',sk8:'Leadership',sk9:'Responsibility',sk10:'Emotional Intelligence',
+    lang_native:'Native',lang_persian:'Persian',lang_native2:'Native',lang_turkish:'Turkish',lang_proficient:'Proficient',lang_english:'English',lang_proficient2:'Proficient',lang_german:'German',lang_upper:'Upper Inter.',lang_pashto:'Pashto',lang_upper2:'Upper Inter.',
+    proj_title:'Projects',proj_intro:'Select a category to explore my work.',
+    tab_research:'Research',tab_calligraphy:'Calligraphy',tab_design:'Graphic Design',
+    abstract:'Abstract',keywords:'Keywords:',coauthored:'Co-authored with Ziwer Rasul',
+    calli_gallery_desc:'A selection of Nastaliq calligraphy works — traditional and modern — in ink and digital media.',
+    design_gallery_desc:'A selection of logo and graphic design projects.',
+    loading:'Loading gallery...',
+    hobbies_title:'Hobbies & Interests',
+    hob1_title:'Nastaliq Calligraphy',hob1_desc:'Practicing traditional and modern Nastaliq calligraphy — a meditative discipline that connects me to my cultural roots and creative identity.',
+    hob2_title:'Reading & Philosophy',hob2_desc:'Avid reader of Kafka, Dostoevsky, Hedayat, Sartre, and Camus — exploring the intersection of philosophy, literature, and social reality.',
+    hob3_title:'Graphic Design & Digital Art',hob3_desc:'Creating visual narratives through design — from brand identities to infographics that give data a human face.',
+    hob4_title:'Poetry Writing',hob4_desc:'Poetry was my first language for processing the world — a creative outlet that still informs how I approach sociological inquiry.',
+    hob5_title:'Cultural Exploration & Travel',hob5_desc:'Having lived in Afghanistan, Turkey, and Germany, I am passionate about understanding diverse cultures, languages, and worldviews firsthand.',
+    hob6_title:'Data Storytelling',hob6_desc:'Turning raw datasets into compelling visual narratives — making complexity accessible without reducing it.',
+    contact_title:'Contact',get_in_touch:'Get in Touch',
+    lbl_email:'Email',lbl_phone:'Phone',lbl_address:'Address',
+  },
+
+  de:{
+    nav_profile:'Profil',nav_insight:'Insight',nav_expression:'Expression',
+    nav_education:'Bildungsweg',nav_experience:'Erfahrung',nav_certificates:'Zertifikate',
+    nav_awards:'Auszeichnungen',nav_skills:'Fähigkeiten',nav_projects:'Projekte',
+    nav_hobbies:'Hobbys',nav_contact:'Kontakt',
+    hero_subtitle:'Soziologe · Datenanalyst · Kalligraph & Grafikdesigner',
+    hero_bio:'In einer Welt, die menschliche Erfahrungen auf Daten und Algorithmen reduziert, nutze ich Daten, Design und Code, um ihre Komplexität zu erkunden – anstatt sie zu vereinfachen. Mit einem Hintergrund in Soziologie und Internationalen Beziehungen betrachte ich digitale Werkzeuge als einen begrenzten, aber nützlichen Zugang zur Komplexität menschlicher Natur.',
+    btn_contact:'Kontakt aufnehmen',
+    glance_title:'Auf einen Blick',
+    glance_research:'Forschungsmethoden',glance_research_sub:'Qualitativ<br>Quantitativ<br>Gemischte Methoden',
+    glance_data:'Datenanalyse',
+    glance_calli:'Kalligraphie',glance_calli_sub:'Nastaliq<br>Traditionell<br>Digital',
+    glance_design:'Grafikdesign',glance_design_sub:'Logo<br>Infografik<br>Datenvisualisierung',
+    insight_title:'Insight — Forschung & Datenanalyse',
+    insight_intro:'Meine Forschungsexpertise verbindet qualitative und quantitative Methoden, gestützt durch praktische Erfahrung mit modernen Datenanalyse-Tools und akademischen Forschungsumgebungen.',
+    qual_title:'Qualitative Methoden',qual_desc:'Thematische Kodierung, MAXQDA-Analyse, Fragebogenentwicklung und -durchführung, akademische Literaturrecherche, Mixed-Methods-Integration und Feldforschung.',
+    quant_title:'Quantitative Methoden',quant_desc:'Deskriptive und inferentielle Statistik, Hypothesentests, umfragebasierte Forschung sowie Datenbereinigung und -analyse mit Python, SPSS, SQL, Excel und Tableau.',
+    tools_title:'Datenanalyse-Tools',
+    expr_title:'Expression — Design & Kalligraphie',
+    expr_intro:'Meine kreative Reise begann mit Poesie und Kalligraphie als Reaktion auf erlebtes Leid — ein Bedürfnis, die Welt durch Kunst zu verarbeiten, bevor ich die Sprache der Sozialwissenschaften hatte.',
+    expr_gd:'Grafikdesign',expr_gd_desc:'Erstellung überzeugender visueller Identitäten, digitaler Kunstwerke, Infografiken, Datenvisualisierungen und Motion Graphics mit der Adobe Creative Suite.',
+    ps_desc:'Bildbearbeitung & Komposition',ai_desc:'Vektorgrafik & Branding',ae_desc:'Motion Graphics & Animation',
+    tag_infographic:'Infografikdesign',tag_datastory:'Daten-Storytelling',tag_branding:'Markenidentität',tag_layout:'Visuelles Layout',
+    expr_calli:'Nastaliq-Kalligraphie',expr_calli_desc:'Praktiziert in der klassischen Nastaliq-Schrift — einer der verfeinertsten Formen der persisch-arabischen Kalligraphie — in traditionellen und zeitgenössischen digitalen Stilen.',
+    trad_nastaliq:'Traditionelle Nastaliq',trad_nastaliq_desc:'Rohrfeder · Klassische Regeln · Tinte auf Papier',
+    dig_nastaliq:'Digitale Nastaliq',dig_nastaliq_desc:'Stylus · Digitale Leinwand · Zeitgenössisches Design',
+    edu_title:'Bildungsweg',
+    edu1_title:'Bachelor Internationale Beziehungen',edu1_desc:'Doppelstudium. Schwerpunkt: Konfliktlösung, soziale Werte und Migrationsstudien. Forschungsprojekt: <em>„Der Einfluss sozialer Werte von Migranten auf den Integrationsprozess."</em>',
+    edu2_title:'Bachelor Soziologie',edu2_desc:'Spezialisierung auf Analyse sozialer Werte, Konflikte und Migration. Bachelorarbeit: <em>„Die Auswirkungen ethnischer, politischer und religiöser Wertunterschiede auf die Konflikte in Afghanistan."</em>',
+    edu3_title:'Deutschkurse & Datenanalyse',edu3_desc:'Derzeit Ausbau der Deutschkenntnisse von B2+ auf C1 und darüber hinaus, begleitet von Datenanalyse-Kursen — zur Vorbereitung auf ein Postgraduiertenstudium der Soziologie.',
+    tag_inprogress:'Laufend',
+    exp_title:'Praktische Erfahrung',
+    exp1_title:'Praktikant — Forschungsassistenz',exp1_desc:'Forschungsunterstützung zu Konflikten in Afghanistan. Erstellung eines Forschungsvorschlags zu sozialen Wertorientierungen von Migranten und Präsentation beim Lehrstuhl für Entwicklungsökonomik.',
+    exp2_title:'Feldforscher',exp2_desc:'Durchführung von Befragungen mit Begünstigten, Überprüfung der Datenqualität, Unterstützung des Programm-Monitorings und Mitwirkung bei der Umsetzung von Überwachungsplänen.',
+    exp3_title:'Praktikant — Daten & Forschung',exp3_desc:'Erstellung von Forschungsvorschlägen, Durchführung von Erhebungen und Datenauswertung mit Excel und SPSS.',
+    exp4_title:'Studentischer Vertreter',exp4_desc:'Unterstützung neu ankommender Studierender bei Unterkunft und Universitätsanmeldung. Organisation kultureller Veranstaltungen und Bildungsreisen.',
+    cert_title:'Zertifikate',view_cert:'Zertifikat ansehen ↗',
+    cert1_desc:'56,5 Stunden Python-Programmierung. Dozentin: Dr. Angela Yu.',
+    cert2_desc:'Python für Datenanalyse, KI-Grundlagen und Entwicklung.',
+    cert3_desc:'Wichtige Data-Science-Tools einschließlich Jupyter, GitHub und Watson Studio.',
+    cert4_desc:'SQL für Datenabruf, Filterung und Datenbankverwaltung.',
+    cert5_desc:'Statistische Methoden, Umfragedesign und quantitative Datenanalyse für die Sozialforschung.',
+    cert6_desc:'Thematische Kodierung, Interviews und qualitative Dateninterpretation.',
+    cert7_desc:'Deskriptive und inferentielle Statistik, Wahrscheinlichkeitsrechnung und Hypothesentests.',
+    cert8_desc:'Grundlagen der Wahrscheinlichkeitstheorie und ihre Anwendungen in der Statistik.',
+    cert9_desc:'Anwendung von Datenanalyse auf Geschäftskennzahlen und Entscheidungsfindung.',
+    cert10_desc:'Aufbau und Verwaltung von Markenidentitäten und Marketingstrategien.',
+    cert11_desc:'Verständnis von Konflikttypen und Lösungsstrategien.',
+    cert12_desc:'3-kursige Spezialisierung zu TOEFL Lesen, Hören, Sprechen, Schreiben und Prüfungsstrategien.',
+    awards_title:'Auszeichnungen & Ehrungen',
+    award1_title:'Türkisches Regierungsstipendium (Soziologie)',award1_badge:'Stipendium',award1_desc:'Vollstipendium der türkischen Regierung für ein Soziologiestudium in der Türkei.',
+    award2_title:'Auszeichnung für herausragende Leistungen — Üstün Başarı Bursu',award2_badge:'Auszeichnung',award2_desc:'Verliehen für hervorragende akademische Leistungen im Studium.',
+    award3_title:'Hochleistungsstudierender',award3_badge:'Auszeichnung',award3_desc:'Als Hochleistungsstudierender im Soziologie-Fachbereich anerkannt.',
+    award4_title:'Erasmus+ Praktikumsprogramm',award4_badge:'Auszeichnung',award4_desc:'Ausgewählt für das Erasmus+ Praktikumsprogramm zur Forschung an der Georg-August-Universität Göttingen.',
+    award5_title:'Zulassung zum Doppelstudium',award5_badge:'Leistung',award5_desc:'Zulassung zum wettbewerbsfähigen Doppelstudium in Internationalen Beziehungen neben dem Soziologiestudium.',
+    skills_personal:'Persönliche Fähigkeiten',skills_computer:'Computerkenntnisse',skills_lang:'Sprachkenntnisse',
+    sk1:'Kritisches Denken',sk2:'Kreativität',sk3:'Empathie',sk4:'Zeitmanagement',sk5:'Teamarbeit',sk6:'Kommunikation',sk7:'Problemlösung',sk8:'Führungskompetenz',sk9:'Verantwortungsbewusstsein',sk10:'Emotionale Intelligenz',
+    lang_native:'Muttersprache',lang_persian:'Persisch',lang_native2:'Muttersprache',lang_turkish:'Türkisch',lang_proficient:'Fließend',lang_english:'Englisch',lang_proficient2:'Fließend',lang_german:'Deutsch',lang_upper:'Obere Mittelstufe',lang_pashto:'Paschtu',lang_upper2:'Obere Mittelstufe',
+    proj_title:'Projekte',proj_intro:'Wählen Sie eine Kategorie, um meine Arbeiten zu erkunden.',
+    tab_research:'Forschung',tab_calligraphy:'Kalligraphie',tab_design:'Grafikdesign',
+    abstract:'Zusammenfassung',keywords:'Schlüsselwörter:',coauthored:'Gemeinsam verfasst mit Ziwer Rasul',
+    calli_gallery_desc:'Eine Auswahl von Nastaliq-Kalligraphiewerken — traditionell und modern — in Tinte und digitalen Medien.',
+    design_gallery_desc:'Eine Auswahl von Logo- und Grafikdesign-Projekten.',
+    loading:'Galerie wird geladen...',
+    hobbies_title:'Hobbys & Interessen',
+    hob1_title:'Nastaliq-Kalligraphie',hob1_desc:'Praktizieren traditioneller und moderner Nastaliq-Kalligraphie — eine meditative Disziplin, die mich mit meinen kulturellen Wurzeln und meiner kreativen Identität verbindet.',
+    hob2_title:'Lesen & Philosophie',hob2_desc:'Begeisterter Leser von Kafka, Dostojewski, Hedayat, Sartre und Camus — auf der Suche nach dem Schnittpunkt von Philosophie, Literatur und sozialer Realität.',
+    hob3_title:'Grafikdesign & Digitale Kunst',hob3_desc:'Visuelle Geschichten erzählen durch Design — von Markenidentitäten bis hin zu Infografiken, die Daten ein menschliches Gesicht geben.',
+    hob4_title:'Poesie schreiben',hob4_desc:'Poesie war meine erste Sprache, um die Welt zu verarbeiten — ein kreativer Ausdruck, der noch heute meine soziologische Forschung prägt.',
+    hob5_title:'Kulturerkundung & Reisen',hob5_desc:'Da ich in Afghanistan, der Türkei und Deutschland gelebt habe, bin ich leidenschaftlich daran interessiert, verschiedene Kulturen, Sprachen und Weltanschauungen aus erster Hand zu verstehen.',
+    hob6_title:'Daten-Storytelling',hob6_desc:'Rohdatensätze in überzeugende visuelle Narrative verwandeln — Komplexität zugänglich machen, ohne sie zu vereinfachen.',
+    contact_title:'Kontakt',get_in_touch:'Kontakt aufnehmen',
+    lbl_email:'E-Mail',lbl_phone:'Telefon',lbl_address:'Adresse',
+  },
+
+  tr:{
+    nav_profile:'Profil',nav_insight:'İdrak',nav_expression:'İfade',
+    nav_education:'Eğitim',nav_experience:'Deneyim',nav_certificates:'Sertifikalar',
+    nav_awards:'Ödüller',nav_skills:'Beceriler',nav_projects:'Projeler',
+    nav_hobbies:'Hobiler',nav_contact:'İletişim',
+    hero_subtitle:'Sosyolog · Veri Analisti · Hattat & Grafik Tasarımcı',
+    hero_bio:'İnsan deneyimini veri ve algoritmalara indirgeyen bir dünyada, ben bu karmaşıklığı basitleştirmek yerine keşfetmek için veri, tasarım ve kod kullanıyorum. Sosyoloji ve uluslararası ilişkiler geçmişimle, dijital araçları insan doğasının karmaşıklığına yaklaşmanın sınırlı ama yararlı bir yolu olarak görüyorum.',
+    btn_contact:'İletişime Geç',
+    glance_title:'Kısa Bakış',
+    glance_research:'Araştırma Yöntemleri',glance_research_sub:'Nitel<br>Nicel<br>Karma Yöntemler',
+    glance_data:'Veri Analizi',
+    glance_calli:'Hat Sanatı',glance_calli_sub:'Nastalik<br>Geleneksel<br>Dijital',
+    glance_design:'Grafik Tasarım',glance_design_sub:'Logo<br>İnfografik<br>Veri Görselleştirme',
+    insight_title:'İdrak — Araştırma & Veri Analizi',
+    insight_intro:'Araştırma uzmanlığım, nitel ve nicel metodolojileri bir araya getirmekte; modern veri analizi araçları ve akademik araştırma ortamlarıyla desteklenmektedir.',
+    qual_title:'Nitel Yöntemler',qual_desc:'Tematik kodlama, MAXQDA analizi, anket tasarımı ve uygulama, akademik literatür taraması, karma yöntem entegrasyonu ve saha araştırması.',
+    quant_title:'Nicel Yöntemler',quant_desc:'Betimsel ve çıkarımsal istatistik, hipotez testi, anket tabanlı araştırma ve Python, SPSS, SQL, Excel ve Tableau kullanarak veri temizleme ve analizi.',
+    tools_title:'Veri Analizi Araçları',
+    expr_title:'İfade — Tasarım & Hat Sanatı',
+    expr_intro:"Yaratıcı yolculuğum, zorlu anları işlemenin bir yolu olarak şiir ve hat sanatıyla başladı — sosyal bilimin dilini edinmeden önce dünyayı sanat yoluyla anlamlandırma ihtiyacından.",
+    expr_gd:'Grafik Tasarım',expr_gd_desc:'Adobe Creative Suite kullanarak etkileyici görsel kimlikler, dijital eserler, infografikler, veri görselleştirme içerikleri ve hareket grafikleri oluşturma.',
+    ps_desc:'Görüntü düzenleme & kompozisyon',ai_desc:'Vektör grafik & marka tasarımı',ae_desc:'Hareket grafikleri & animasyon',
+    tag_infographic:'İnfografik Tasarım',tag_datastory:'Veri Hikâyeciliği',tag_branding:'Marka Varlıkları',tag_layout:'Görsel Düzen',
+    expr_calli:'Nastalik Hat Sanatı',expr_calli_desc:'Farsça-Arapça hat sanatının en zarif biçimlerinden biri olan klasik Nastalik yazısıyla, geleneksel ve çağdaş dijital stillerde icra edilmektedir.',
+    trad_nastaliq:'Geleneksel Nastalik',trad_nastaliq_desc:'Kamış kalem · Klasik kurallar · Kâğıt üzerine mürekkep',
+    dig_nastaliq:'Dijital Nastalik',dig_nastaliq_desc:'Kalem · Dijital tuval · Çağdaş tasarım',
+    edu_title:'Eğitim Geçmişi',
+    edu1_title:'Uluslararası İlişkiler Lisans',edu1_desc:'Çift anadal programı. Odak: Çatışma çözümü, sosyal değerler ve göç çalışmaları. Araştırma projesi: <em>«Göçmenlerin Sosyal Değerlerinin Entegrasyon Sürecine Etkisi.»</em>',
+    edu2_title:'Sosyoloji Lisans',edu2_desc:'Sosyal değerler, çatışmalar ve göç analizi üzerine uzmanlaşma. Lisans tezi: <em>«Afganistan\'daki Etnik, Siyasi ve Dini Değer Farklılıklarının Çatışmalara Etkisi.»</em>',
+    edu3_title:'Almanca Dil Kursları & Veri Analizi',edu3_desc:'Almancayı B2+ düzeyinden C1 ve ötesine taşıma çalışmaları, veri analizi kurslarıyla birlikte — sosyoloji alanında lisansüstü eğitime hazırlık.',
+    tag_inprogress:'Devam Ediyor',
+    exp_title:'Pratik Deneyim',
+    exp1_title:'Stajyer — Araştırma Asistanı',exp1_desc:'Afganistan\'daki çatışmalar üzerine araştırma desteği. Göçmenlerin Sosyal Değer Yönelimleri konusunda araştırma önerisi hazırlandı ve Kalkınma Ekonomisi kürsüsüne sunuldu.',
+    exp2_title:'Saha Araştırmacısı',exp2_desc:'Faydalanıcılarla anketler yapıldı, veri kalitesi kontrol edildi, program faaliyetlerinin genel izlenmesi desteklendi ve kapsama alanında izleme planlarının uygulanmasına katılındı.',
+    exp3_title:'Stajyer — Veri & Araştırma',exp3_desc:'Araştırma önerileri hazırlandı, anket ve veri toplama çalışmaları yürütüldü, Excel ve SPSS ile veri analizi yapıldı.',
+    exp4_title:'Öğrenci Temsilcisi',exp4_desc:'Yeni gelen öğrencilere konaklama ve üniversite kaydı konusunda yardımcı olundu. Kültürel dayanışma etkinlikleri ve eğitim gezileri düzenlendi.',
+    cert_title:'Sertifikalar',view_cert:'Sertifikayı Görüntüle ↗',
+    cert1_desc:'56,5 saat Python programlama. Eğitmen: Dr. Angela Yu.',
+    cert2_desc:'Veri analizi, yapay zeka temelleri ve geliştirme için Python.',
+    cert3_desc:'Jupyter, GitHub ve Watson Studio dahil temel veri bilimi araçları.',
+    cert4_desc:'Veri sorgulama, filtreleme ve veritabanı yönetimi için SQL.',
+    cert5_desc:'Sosyal araştırmalar için istatistiksel yöntemler, anket tasarımı ve nicel veri analizi.',
+    cert6_desc:'Tematik kodlama, görüşme ve nitel veri yorumlama.',
+    cert7_desc:'Betimsel ve çıkarımsal istatistik, olasılık ve hipotez testi.',
+    cert8_desc:'Olasılık teorisinin temelleri ve istatistikteki uygulamaları.',
+    cert9_desc:'Veri analizinin iş metrikleri ve karar verme süreçlerine uygulanması.',
+    cert10_desc:'Marka kimliklerinin oluşturulması ve pazarlama stratejileri.',
+    cert11_desc:'Çatışma türlerinin ve çözüm stratejilerinin anlaşılması.',
+    cert12_desc:'TOEFL Okuma, Dinleme, Konuşma, Yazma ve sınav stratejilerini kapsayan 3 kurslu uzmanlık programı.',
+    awards_title:'Ödüller & Onurlar',
+    award1_title:'Türk Devlet Bursu (Sosyoloji)',award1_badge:'Burs',award1_desc:'Türkiye\'de Sosyoloji lisans eğitimi için tam Türk devlet bursu.',
+    award2_title:'Üstün Başarı Bursu',award2_badge:'Onur',award2_desc:'Lisans eğitimindeki üstün akademik başarı nedeniyle verildi.',
+    award3_title:'Yüksek Onur Öğrencisi',award3_badge:'Onur',award3_desc:'Sosyoloji Bölümü\'ndeki olağanüstü akademik başarısıyla Yüksek Onur Öğrencisi olarak tanındı.',
+    award4_title:'Erasmus+ Staj Programı',award4_badge:'Ödül',award4_desc:'Georg-August-Üniversitesi Göttingen\'de araştırma yapmak üzere Erasmus+ Staj Programı\'na seçildi.',
+    award5_title:'Çift Anadal Programı Kabulü',award5_badge:'Başarı',award5_desc:'Sosyoloji eğitimiyle eş zamanlı olarak Uluslararası İlişkiler Çift Anadal Programı\'na kabul edildi.',
+    skills_personal:'Kişisel Beceriler',skills_computer:'Bilgisayar Becerileri',skills_lang:'Dil Becerileri',
+    sk1:'Eleştirel Düşünme',sk2:'Yaratıcılık',sk3:'Empati',sk4:'Zaman Yönetimi',sk5:'Takım Çalışması',sk6:'İletişim',sk7:'Problem Çözme',sk8:'Liderlik',sk9:'Sorumluluk',sk10:'Duygusal Zeka',
+    lang_native:'Anadil',lang_persian:'Farsça',lang_native2:'Anadil',lang_turkish:'Türkçe',lang_proficient:'İleri',lang_english:'İngilizce',lang_proficient2:'İleri',lang_german:'Almanca',lang_upper:'Üst Orta',lang_pashto:'Peştuca',lang_upper2:'Üst Orta',
+    proj_title:'Projeler',proj_intro:'Çalışmalarımı keşfetmek için bir kategori seçin.',
+    tab_research:'Araştırma',tab_calligraphy:'Hat Sanatı',tab_design:'Grafik Tasarım',
+    abstract:'Özet',keywords:'Anahtar Kelimeler:',coauthored:'Ziwer Rasul ile birlikte yazıldı',
+    calli_gallery_desc:'Mürekkep ve dijital ortamda geleneksel ve modern Nastalik hat sanatı eserlerinden bir seçki.',
+    design_gallery_desc:'Logo ve grafik tasarım projelerinden bir seçki.',
+    loading:'Galerie yükleniyor...',
+    hobbies_title:'Hobiler & İlgi Alanları',
+    hob1_title:'Nastalik Hat Sanatı',hob1_desc:'Geleneksel ve modern Nastalik hat sanatı pratiği — kültürel köklerimle ve yaratıcı kimliğimle bağlantı kuran meditatif bir disiplin.',
+    hob2_title:'Okuma & Felsefe',hob2_desc:'Kafka, Dostoyevski, Hedayat, Sartre ve Camus\'nun tutkulu okuyucusu — felsefe, edebiyat ve toplumsal gerçekliğin kesişimini keşfetmek için.',
+    hob3_title:'Grafik Tasarım & Dijital Sanat',hob3_desc:'Tasarım yoluyla görsel anlatılar oluşturmak — marka kimliklerinden veriye insani bir yüz kazandıran infografiklere kadar.',
+    hob4_title:'Şiir Yazma',hob4_desc:'Şiir, dünyayı işlemenin ilk dilimdi — sosyolojik araştırma yaklaşımımı hâlâ etkileyen yaratıcı bir ifade biçimi.',
+    hob5_title:'Kültürel Keşif & Seyahat',hob5_desc:'Afganistan, Türkiye ve Almanya\'da yaşamış biri olarak farklı kültürleri, dilleri ve dünya görüşlerini bizzat anlamaya tutkuyla bağlıyım.',
+    hob6_title:'Veri Hikâyeciliği',hob6_desc:'Ham veri setlerini etkileyici görsel anlatılara dönüştürmek — karmaşıklığı basitleştirmeden erişilebilir kılmak.',
+    contact_title:'İletişim',get_in_touch:'İletişime Geç',
+    lbl_email:'E-posta',lbl_phone:'Telefon',lbl_address:'Adres',
+  }
+};
+
+let currentLang='en';
+
+function setLang(lang, event){
+  currentLang=lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  if(event && event.target) event.target.classList.add('active');
+  const t=translations[lang];
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    const key=el.getAttribute('data-key');
+    if(t[key]!==undefined) el.innerHTML=t[key];
+  });
+}
+</script>
+</body>
+</html>
