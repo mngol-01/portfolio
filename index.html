@@ -8,7 +8,7 @@
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   :root{--primary:#1a3a5c;--accent:#2e86ab;--gold:#c9a84c;--light:#f5f7fa;--text:#2d2d2d;--muted:#6b7280;--border:#e2e8f0;--white:#fff;}
-  body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--light);line-height:1.7;}
+  body{font-family:'Segoe UI',system-ui,sans-serif;color:var(--text);background:var(--light);line-height:1.7;overflow-x:hidden;}
   nav{position:fixed;top:0;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border);z-index:1000;padding:0 1.5rem;}
   .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px;}
   .nav-logo{font-weight:700;font-size:1rem;color:var(--primary);cursor:pointer;letter-spacing:.5px;}
@@ -89,21 +89,31 @@
   .page{padding-bottom:4rem;}
   @media(max-width:1024px){.grid-3,.glance-grid{grid-template-columns:1fr 1fr;}}
   @media(max-width:768px){
-    .page{padding:70px 1.2rem 4rem;}
+    .page{padding:70px 1.2rem 5.2rem;}
     .hero{flex-direction:column;text-align:center;gap:1.5rem;}
+    .hero-text,.highlight-box,.mini-grid,.glance-grid{width:100%;}
     .hero-text h1{font-size:1.6rem;}
-    .quick-links{justify-content:center;}
-    .grid-2,.grid-3,.glance-grid{grid-template-columns:1fr;}
+    .quick-links{justify-content:center;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;}
+    .quick-links .btn{text-align:center;width:100%;}
+    .profile-meta{text-align:left;}
+    .mini-grid,.grid-2,.grid-3,.glance-grid{grid-template-columns:1fr;}
+    .proj-header{flex-direction:column;}
+    .hobby-item{flex-direction:column;align-items:flex-start;gap:.9rem;}
+    #calli-gallery,#design-gallery{columns:1 !important;}
+    .lang-switcher{flex-wrap:wrap;padding:.55rem .8rem;}
     .nav-links{display:none;flex-direction:column;position:absolute;top:58px;left:0;right:0;background:white;border-bottom:1px solid var(--border);padding:.8rem 1rem;}
     .nav-links.open{display:flex;}
     .hamburger{display:flex;}
     .section-title{font-size:1.15rem;}
   }
   @media(max-width:480px){
-    .page{padding:68px 1rem 4rem;}
+    .page{padding:68px 1rem 5.6rem;}
     .hero-text h1{font-size:1.4rem;}
     .avatar{width:110px;height:150px;}
-    .glance-grid{grid-template-columns:1fr 1fr !important;}
+    .quick-links{grid-template-columns:1fr;}
+    .glance-grid{grid-template-columns:1fr !important;}
+    .lang-switcher{gap:.4rem;}
+    .lang-btn{flex:1 1 30%;padding:.35rem .55rem;font-size:.74rem;text-align:center;}
   }
 </style>
 </head>
