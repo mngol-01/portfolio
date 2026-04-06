@@ -64,6 +64,22 @@
   .contact-info a{color:var(--text);text-decoration:none;}
   .contact-info a:hover{color:var(--primary);}
   .contact-link::after{content:" ↗";color:var(--accent);font-size:.85em;}
+  .contact-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:1rem;align-items:start;}
+  .contact-form label{display:block;font-size:.82rem;color:var(--primary);font-weight:600;margin-bottom:.35rem;}
+  .contact-form .field{margin-bottom:.9rem;}
+  .contact-form input,.contact-form textarea{width:100%;padding:.8rem .9rem;border:1px solid var(--border);border-radius:10px;background:var(--white);font:inherit;color:var(--text);}
+  .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(46,134,171,.12);}
+  .contact-form textarea{min-height:140px;resize:vertical;}
+  .contact-note{font-size:.8rem;color:var(--muted);margin-top:.8rem;line-height:1.6;}
+  .modal-backdrop{position:fixed;inset:0;background:rgba(26,58,92,.5);display:none;align-items:center;justify-content:center;z-index:3000;padding:1rem;}
+  .modal-backdrop.open{display:flex;}
+  .modal-card{width:min(100%,560px);max-height:90vh;overflow:auto;background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.25rem 1.25rem 1rem;box-shadow:0 20px 60px rgba(0,0,0,.18);}
+  .modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1rem;}
+  .modal-close{background:none;border:none;color:var(--muted);font-size:1.4rem;line-height:1;cursor:pointer;}
+  .modal-close:hover{color:var(--primary);}
+  .toast{position:fixed;right:1rem;bottom:5.2rem;z-index:3500;display:none;max-width:320px;background:var(--primary);color:var(--white);padding:.9rem 1rem;border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.2);font-size:.88rem;line-height:1.5;}
+  .toast.show{display:block;animation:toast-in .25s ease-out;}
+  @keyframes toast-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
   .ico{width:34px;height:34px;border-radius:8px;background:var(--light);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
   .badge{display:inline-block;background:#fef3c7;color:#92400e;border:1px solid #fde68a;border-radius:6px;padding:.12rem .55rem;font-size:.73rem;margin-left:.4rem;}
   .hobby-item{background:var(--white);border-radius:12px;padding:1.1rem 1.4rem;border:1px solid var(--border);display:flex;align-items:center;gap:1.2rem;margin-bottom:.8rem;}
@@ -101,6 +117,7 @@
     .quick-links .btn{text-align:center;width:100%;}
     .profile-meta{text-align:left;}
     .mini-grid,.grid-2,.grid-3,.glance-grid{grid-template-columns:1fr;}
+    .contact-layout{grid-template-columns:1fr;}
     .proj-header{flex-direction:column;}
     .hobby-item{flex-direction:column;align-items:flex-start;gap:.9rem;}
     #calli-gallery,#design-gallery{columns:1 !important;}
@@ -164,30 +181,13 @@
     </div>
   </div>
   <div class="highlight-box">
-    <h3 data-key="highlights_title">Selected Highlights</h3>
+    <h3 data-key="highlights_title">Research Highlights</h3>
     <ul>
-      <li data-key="highlight_1">Submitted a journal article, now under review, using ten rounds of European Social Survey data on value orientations and immigration attitudes in Germany.</li>
-      <li data-key="highlight_2">Conducted 42 field interviews with migrants from Afghanistan across Turkey through phone and in-person interviews for a short-term monitoring project.</li>
-      <li data-key="highlight_3">Developed a qualitative phenomenological proposal at Georg-August-Universität Göttingen, including a theory-based semi-structured interview guide designed for MAXQDA-supported analysis.</li>
-      <li data-key="highlight_4">Designed and administered 100+ survey questionnaires in an original Kabul University research initiative on student relations.</li>
+      <li data-key="highlight_1">Journal article under review based on ten rounds of ESS data.</li>
+      <li data-key="highlight_2">42 field interviews across Turkey for a migrant monitoring project.</li>
+      <li data-key="highlight_3">Phenomenological proposal with a theory-based interview guide and MAXQDA design.</li>
+      <li data-key="highlight_4">100+ survey questionnaires designed and administered at Kabul University.</li>
     </ul>
-  </div>
-  <div style="margin-top:1.5rem;">
-    <span class="section-title" data-key="selected_research_title">Selected Research</span>
-    <div class="mini-grid">
-      <div class="mini-card">
-        <h3 data-key="selected_research_1_title">ESS Journal Article</h3>
-        <p data-key="selected_research_1_desc">Journal article under review on value orientations and immigration attitudes in Germany using ten rounds of European Social Survey data.</p>
-      </div>
-      <div class="mini-card">
-        <h3 data-key="selected_research_2_title">Migration Proposal</h3>
-        <p data-key="selected_research_2_desc">Phenomenological working paper on migrants' social values and cultural adaptation in Germany, built around a theory-based semi-structured interview design and qualitative analysis in MAXQDA.</p>
-      </div>
-      <div class="mini-card">
-        <h3 data-key="selected_research_3_title">Conflict Thesis</h3>
-        <p data-key="selected_research_3_desc">Bachelor's thesis on value differences and conflict structures in Afghanistan from a sociological and structuralist perspective.</p>
-      </div>
-    </div>
   </div>
   <div style="margin-top:1.5rem;">
     <span class="section-title" data-key="glance_title">At a Glance</span>
@@ -227,6 +227,7 @@
 <!-- EXPERIENCE -->
 <div class="page" id="page-experience">
   <span class="section-title" data-key="exp_title">Practical Experience</span>
+  <div class="card"><h3 data-key="exp0_title">Independent Researcher</h3><div class="meta">Oct 2023 – Present</div><p data-key="exp0_desc">Conducting independent research on value orientations and attitudes toward migration using European Social Survey data, with a manuscript currently under review. Further work examines the impact of artificial intelligence on simulation and social behaviour, alongside academic writing on migration and conflict research.</p><div class="tags"><span class="tag accent">ESS Analysis</span><span class="tag accent">Migration Research</span><span class="tag accent">AI & Society</span><span class="tag accent">Academic Writing</span></div></div>
   <div class="card"><h3 data-key="exp1_title">Intern — Research Assistant</h3><div class="meta">Georg-August-Universität Göttingen · Aug 01 – Oct 15, 2023</div><p data-key="exp1_desc">Worked under the supervision of Dr. Sarah Langlotz to develop a qualitative phenomenological research proposal on immigrants' social value orientations and cultural adaptation in Germany. Conducted a focused literature review, designed a semi-structured interview guide based on Schwartz's value theory, Gordon's assimilation model, and Berry's acculturation framework, and presented the final proposal to the Chair of Development Economics.</p><div class="tags"><span class="tag accent">Literature Review</span><span class="tag accent">Interview Design</span><span class="tag accent">Migration Research</span><span class="tag accent">Erasmus+</span></div></div>
   <div class="card"><h3 data-key="exp2_title">Field Researcher</h3><div class="meta">RMTeam & DRC · Jul 29 – Aug 28, 2022</div><p data-key="exp2_desc">Conducted 42 interviews with immigrants from Afghanistan across Turkey through phone interviews and in-person visits for a short-term monitoring project focused on migrants from Afghanistan and Syria. Collected field data on migrant conditions and experiences, contributing evidence used to better understand the situation of displaced communities in Turkey.</p><div class="tags"><span class="tag accent">Field Interviews</span><span class="tag accent">Phone & In-Person</span><span class="tag accent">Migrant Monitoring</span><span class="tag accent">Turkey Fieldwork</span></div></div>
   <div class="card"><h3 data-key="exp3_title">Intern — Data & Research</h3><div class="meta">National Institute of Planning (NIP) · Jul 20 – Sep 20, 2020</div><p data-key="exp3_desc">Proposed an original research project on male-female student relations at Kabul University and was accepted as an initiative intern despite the institute not normally offering internships. Worked with supervisors to design the questionnaire and collect more than 100 survey responses, building foundational experience in research design, field data collection, and project development despite the study being interrupted by changes in Afghanistan.</p><div class="tags"><span class="tag accent">Research Initiative</span><span class="tag accent">Questionnaire Design</span><span class="tag accent">100+ Surveys</span><span class="tag accent">Kabul University</span></div></div>
@@ -292,10 +293,10 @@
     <button onclick="switchTab('design')" id="tab-design" class="btn btn-outline" data-key="tab_design">Graphic Design</button>
   </div>
   <div id="tab-content-research">
-    <div class="proj-card" onclick="toggleAbstract('p1')"><div class="proj-header"><div><h3 data-key="proj1_title">Relational Polarization: Value Orientations and Immigration Attitudes in Germany</h3><div class="meta" data-key="proj1_meta">Submitted to journal · Under review · European Social Survey</div><div class="tags"><span class="tag accent" data-key="proj1_tag1">ESS Longitudinal Analysis</span><span class="tag accent" data-key="proj1_tag2">Schwartz Values</span><span class="tag accent" data-key="proj1_tag3">Immigration Attitudes</span><span class="tag accent" data-key="proj1_tag4">Relational Polarization</span></div></div><span id="p1-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p1"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p data-key="proj1_desc">This study examines the relational structure of value orientations and their association with attitudes toward immigration in Germany using repeated cross-sectional data from ten rounds of the European Social Survey. Drawing on Schwartz's theory of basic human values and Simmel's theory of valuation, it conceptualizes immigration-related polarization as the coexistence of systematically opposed valuation processes. The analysis shows that self-transcendence and conservation operate as opposing poles within a shared evaluative space, and that these patterns become more pronounced during periods of heightened societal contestation in 2008, 2014, and 2016.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> <span data-key="proj1_kw">Polarization; Immigration attitudes; Social values; Schwartz value theory; Simmel's theory of valuation; European Social Survey</span></p></div></div>
-    <div class="proj-card" onclick="toggleAbstract('p2')"><div class="proj-header"><div><h3 data-key="proj2_title">The Impacts of Value Differences on the Conflicts in Afghanistan</h3><div class="meta" data-key="proj2_meta">Bachelor's Thesis · Selçuk University, Sociology · 2022</div><div class="tags"><span class="tag accent" data-key="proj2_tag1">Structuralist Analysis</span><span class="tag accent" data-key="proj2_tag2">Conflict Sociology</span><span class="tag accent" data-key="proj2_tag3">Value Systems</span><span class="tag accent" data-key="proj2_tag4">Afghanistan</span></div></div><span id="p2-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p2"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p data-key="proj2_desc">Using a descriptive-analytical approach based on secondary sources, this study applies a structuralist perspective to explain internal and external conflicts in Afghanistan. It argues that weak cross-cutting ties and limited fraternal interest groups across ethnic, political, and religious structures make conflict more likely, while diverging value systems intensify these tensions.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> <span data-key="proj2_kw">Value differences; Conflict; Cross-cutting ties; Fraternal interest groups; Afghanistan</span></p></div></div>
-    <div class="proj-card" onclick="toggleAbstract('p3')"><div class="proj-header"><div><h3 data-key="proj3_title">The Impact of Artificial Intelligence (AI) on the Simulation Process: From Jean Baudrillard's Perspective</h3><div class="meta" data-key="proj3_meta">Co-authored paper · In preparation for journal submission</div><div class="tags"><span class="tag accent" data-key="proj3_tag1">AI and Society</span><span class="tag accent" data-key="proj3_tag2">Baudrillard</span><span class="tag accent" data-key="proj3_tag3">Hyperreality</span><span class="tag accent" data-key="proj3_tag4">Simulation Theory</span></div></div><span id="p3-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p3"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p data-key="proj3_desc">This study explores the impact of artificial intelligence on the simulation process through Jean Baudrillard's theory of simulacra and hyperreality. It argues that AI represents a new phase in the evolution of simulation, one that deepens the production of hyperreality and significantly reshapes consumer, political, and cultural behavior.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> <span data-key="proj3_kw">Artificial intelligence; Simulacra; Simulation; Hyperreality; Consumer culture</span></p></div></div>
-    <div class="proj-card" onclick="toggleAbstract('p4')"><div class="proj-header"><div><h3 data-key="proj4_title">The Role of Immigrants' Social Value Orientations in Their Cultural Adaptation Process: A Phenomenology Study in Germany</h3><div class="meta" data-key="proj4_meta">Working Paper · Georg-August-Universität Göttingen · 2023</div><div class="tags"><span class="tag accent" data-key="proj4_tag1">Phenomenology</span><span class="tag accent" data-key="proj4_tag2">Social Values</span><span class="tag accent" data-key="proj4_tag3">Cultural Adaptation</span><span class="tag accent" data-key="proj4_tag4">MAXQDA Design</span></div></div><span id="p4-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p4"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p data-key="proj4_desc">This proposal outlines a qualitative phenomenological study on how immigrants' social value orientations shape their cultural adaptation in Germany. It uses in-depth interviews and a semi-structured interview guide developed from Schwartz's value scale, Gordon's seven-stage assimilation model, and Berry's four acculturation strategies. The study proposes a sample of approximately 40 immigrants in Germany, with responses to be analyzed in MAXQDA to explore how social values interact with adaptation experiences and integration policies.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> <span data-key="proj4_kw">Phenomenology; Migration studies; Social values; Cultural adaptation; MAXQDA</span></p></div></div>
+    <div class="proj-card" onclick="toggleAbstract('p1')"><div class="proj-header"><div><h3 data-key="proj1_title">Relational Polarization: Value Orientations and Immigration Attitudes in Germany</h3><div class="meta" data-key="proj1_meta">Submitted to journal · Under review · European Social Survey</div><div class="tags"><span class="tag accent" data-key="proj1_tag1">ESS Longitudinal Analysis</span><span class="tag accent" data-key="proj1_tag2">Schwartz Values</span><span class="tag accent" data-key="proj1_tag3">Immigration Attitudes</span><span class="tag accent" data-key="proj1_tag4">Relational Polarization</span></div></div><span id="p1-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p1"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p data-key="proj1_desc">This study examines the relational structure of value orientations and their association with attitudes toward immigration in Germany using repeated cross-sectional data from ten rounds of the European Social Survey. Drawing on Schwartz's theory of basic human values and Simmel's theory of valuation, it conceptualizes immigration-related polarization as the coexistence of systematically opposed valuation processes. The analysis shows that self-transcendence and conservation operate as opposing poles within a shared evaluative space, and that these patterns become more pronounced during periods of heightened societal contestation in 2008, 2014, and 2016.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> <span data-key="proj1_kw">Polarization; Immigration attitudes; Social values; Schwartz value theory; Simmel's theory of valuation; European Social Survey</span></p><a class="cert-link" href="#" onclick="event.stopPropagation();openPaperRequestModal('Relational Polarization: Value Orientations and Immigration Attitudes in Germany');return false;" data-key="request_paper">Request Full Paper ↗</a></div></div>
+    <div class="proj-card" onclick="toggleAbstract('p2')"><div class="proj-header"><div><h3 data-key="proj2_title">The Impacts of Value Differences on the Conflicts in Afghanistan</h3><div class="meta" data-key="proj2_meta">Bachelor's Thesis · Selçuk University, Sociology · 2022</div><div class="tags"><span class="tag accent" data-key="proj2_tag1">Structuralist Analysis</span><span class="tag accent" data-key="proj2_tag2">Conflict Sociology</span><span class="tag accent" data-key="proj2_tag3">Value Systems</span><span class="tag accent" data-key="proj2_tag4">Afghanistan</span></div></div><span id="p2-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p2"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p data-key="proj2_desc">Using a descriptive-analytical approach based on secondary sources, this study applies a structuralist perspective to explain internal and external conflicts in Afghanistan. It argues that weak cross-cutting ties and limited fraternal interest groups across ethnic, political, and religious structures make conflict more likely, while diverging value systems intensify these tensions.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> <span data-key="proj2_kw">Value differences; Conflict; Cross-cutting ties; Fraternal interest groups; Afghanistan</span></p><a class="cert-link" href="#" onclick="event.stopPropagation();openPaperRequestModal('The Impacts of Value Differences on the Conflicts in Afghanistan');return false;" data-key="request_paper">Request Full Paper ↗</a></div></div>
+    <div class="proj-card" onclick="toggleAbstract('p3')"><div class="proj-header"><div><h3 data-key="proj3_title">The Impact of Artificial Intelligence (AI) on the Simulation Process: From Jean Baudrillard's Perspective</h3><div class="meta" data-key="proj3_meta">Co-authored paper · In preparation for journal submission</div><div class="tags"><span class="tag accent" data-key="proj3_tag1">AI and Society</span><span class="tag accent" data-key="proj3_tag2">Baudrillard</span><span class="tag accent" data-key="proj3_tag3">Hyperreality</span><span class="tag accent" data-key="proj3_tag4">Simulation Theory</span></div></div><span id="p3-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p3"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p data-key="proj3_desc">This study explores the impact of artificial intelligence on the simulation process through Jean Baudrillard's theory of simulacra and hyperreality. It argues that AI represents a new phase in the evolution of simulation, one that deepens the production of hyperreality and significantly reshapes consumer, political, and cultural behavior.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> <span data-key="proj3_kw">Artificial intelligence; Simulacra; Simulation; Hyperreality; Consumer culture</span></p><a class="cert-link" href="#" onclick="event.stopPropagation();openPaperRequestModal('The Impact of Artificial Intelligence (AI) on the Simulation Process: From Jean Baudrillard\\'s Perspective');return false;" data-key="request_paper">Request Full Paper ↗</a></div></div>
+    <div class="proj-card" onclick="toggleAbstract('p4')"><div class="proj-header"><div><h3 data-key="proj4_title">The Role of Immigrants' Social Value Orientations in Their Cultural Adaptation Process: A Phenomenology Study in Germany</h3><div class="meta" data-key="proj4_meta">Working Paper · Georg-August-Universität Göttingen · 2023</div><div class="tags"><span class="tag accent" data-key="proj4_tag1">Phenomenology</span><span class="tag accent" data-key="proj4_tag2">Social Values</span><span class="tag accent" data-key="proj4_tag3">Cultural Adaptation</span><span class="tag accent" data-key="proj4_tag4">MAXQDA Design</span></div></div><span id="p4-arrow" class="proj-arrow">▼</span></div><div class="proj-body" id="p4"><p><strong style="color:var(--primary);" data-key="abstract">Abstract</strong></p><p data-key="proj4_desc">This proposal outlines a qualitative phenomenological study on how immigrants' social value orientations shape their cultural adaptation in Germany. It uses in-depth interviews and a semi-structured interview guide developed from Schwartz's value scale, Gordon's seven-stage assimilation model, and Berry's four acculturation strategies. The study proposes a sample of approximately 40 immigrants in Germany, with responses to be analyzed in MAXQDA to explore how social values interact with adaptation experiences and integration policies.</p><p class="kw"><strong data-key="keywords">Keywords:</strong> <span data-key="proj4_kw">Phenomenology; Migration studies; Social values; Cultural adaptation; MAXQDA</span></p><a class="cert-link" href="#" onclick="event.stopPropagation();openPaperRequestModal('The Role of Immigrants\\' Social Value Orientations in Their Cultural Adaptation Process');return false;" data-key="request_paper">Request Full Paper ↗</a></div></div>
   </div>
   <div id="tab-content-calligraphy" style="display:none;">
     <div class="gallery-seo-card">
@@ -318,6 +319,34 @@
   </div>
 </div>
 <script type="application/ld+json" id="gallery-structured-data"></script>
+<div id="paper-request-modal" class="modal-backdrop" onclick="if(event.target===this) closePaperRequestModal()">
+  <div class="modal-card">
+    <div class="modal-head">
+      <div>
+        <h3 style="color:var(--primary);margin-bottom:.25rem;" data-key="paper_modal_title">Request Full Paper</h3>
+        <p style="color:var(--muted);font-size:.88rem;" data-key="paper_modal_desc">Send a short request and I will get back to you with availability details.</p>
+      </div>
+      <button class="modal-close" type="button" onclick="closePaperRequestModal()" aria-label="Close">×</button>
+    </div>
+    <form id="paper-request-form" class="contact-form" action="https://formspree.io/f/xzdkylrb" method="POST">
+      <input id="paper-form-subject" type="hidden" name="subject" value="Full Paper Request"/>
+      <div class="field">
+        <label for="paper-name" data-key="form_name">Name</label>
+        <input id="paper-name" name="name" type="text" required/>
+      </div>
+      <div class="field">
+        <label for="paper-email" data-key="form_email">Email</label>
+        <input id="paper-email" name="email" type="email" required/>
+      </div>
+      <div class="field">
+        <label for="paper-message" data-key="form_message">Message</label>
+        <textarea id="paper-message" name="message" required></textarea>
+      </div>
+      <button class="btn btn-outline" type="submit" data-key="request_paper_submit">Send Request</button>
+    </form>
+  </div>
+</div>
+<div id="toast" class="toast" aria-live="polite"></div>
 
 <!-- HOBBIES -->
 <div class="page" id="page-hobbies">
@@ -335,14 +364,35 @@
 <!-- CONTACT -->
 <div class="page" id="page-contact">
   <span class="section-title" data-key="contact_title">Contact</span>
-  <div style="margin-top:1rem;max-width:520px;">
-    <div class="contact-info card">
-      <h3 style="color:var(--primary);margin-bottom:1rem;" data-key="get_in_touch">Get in Touch</h3>
-      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2,7 L12,13 L22,7"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);" data-key="lbl_email">Email</div><div style="font-size:.9rem;"><a class="contact-link" href="mailto:abdulhadikomail@gmail.com">abdulhadikomail@gmail.com</a></div></div></div>
-      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6,2 C5,2 3,3 3,5 C3,13 11,21 19,21 C21,21 22,19 22,18 L19,15 C18,14 17,14 16,15 L15,16 C14,17 12,16 10,14 C8,12 7,10 8,9 L9,8 C10,7 10,6 9,5 Z"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);" data-key="lbl_phone">Phone</div><div style="font-size:.9rem;">(+49) 1764 1660001</div></div></div>
-      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 C8,2 5,5 5,9 C5,15 12,22 12,22 C12,22 19,15 19,9 C19,5 16,2 12,2Z"/><circle cx="12" cy="9" r="3"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);" data-key="lbl_address">Address</div><div style="font-size:.9rem;">Carl-Giesecke-Straße 6, Göttingen, 37079, Germany</div></div></div>
-      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><line x1="7" y1="10" x2="7" y2="17"/><line x1="7" y1="7" x2="7" y2="7.5" stroke-width="2.5"/><line x1="11" y1="10" x2="11" y2="17"/><path d="M11,13 C11,11 12.5,10 14,10 C15.5,10 17,11 17,13 L17,17"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);">LinkedIn</div><div style="font-size:.9rem;"><a class="contact-link" href="https://linkedin.com/in/abdulhadi-komail" target="_blank" rel="noopener noreferrer">linkedin.com/in/abdulhadi-komail</a></div></div></div>
-      <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-4a3.5 3.5 0 0 0-1-2.6c3.3-.4 6.8-1.6 6.8-7.1A5.5 5.5 0 0 0 20.3 4 5.1 5.1 0 0 0 20.2 1S19 0.6 16 2.6a13.4 13.4 0 0 0-7 0C6 0.6 4.8 1 4.8 1A5.1 5.1 0 0 0 4.7 4a5.5 5.5 0 0 0-1.5 3.8c0 5.5 3.5 6.7 6.8 7.1A3.5 3.5 0 0 0 9 18v4"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);">GitHub</div><div style="font-size:.9rem;"><a class="contact-link" href="https://github.com/hadi-komail" target="_blank" rel="noopener noreferrer">github.com/hadi-komail</a></div></div></div>
+  <div class="contact-layout" style="margin-top:1rem;">
+    <div style="max-width:520px;">
+      <div class="contact-info card">
+        <h3 style="color:var(--primary);margin-bottom:1rem;" data-key="get_in_touch">Get in Touch</h3>
+        <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M2,7 L12,13 L22,7"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);" data-key="lbl_email">Email</div><div style="font-size:.9rem;"><a class="contact-link" href="mailto:abdulhadikomail@gmail.com">abdulhadikomail@gmail.com</a></div></div></div>
+        <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6,2 C5,2 3,3 3,5 C3,13 11,21 19,21 C21,21 22,19 22,18 L19,15 C18,14 17,14 16,15 L15,16 C14,17 12,16 10,14 C8,12 7,10 8,9 L9,8 C10,7 10,6 9,5 Z"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);" data-key="lbl_phone">Phone</div><div style="font-size:.9rem;">(+49) 1764 1660001</div></div></div>
+        <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 C8,2 5,5 5,9 C5,15 12,22 12,22 C12,22 19,15 19,9 C19,5 16,2 12,2Z"/><circle cx="12" cy="9" r="3"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);" data-key="lbl_address">Address</div><div style="font-size:.9rem;">Göttingen, Germany</div></div></div>
+        <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><line x1="7" y1="10" x2="7" y2="17"/><line x1="7" y1="7" x2="7" y2="7.5" stroke-width="2.5"/><line x1="11" y1="10" x2="11" y2="17"/><path d="M11,13 C11,11 12.5,10 14,10 C15.5,10 17,11 17,13 L17,17"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);">LinkedIn</div><div style="font-size:.9rem;"><a class="contact-link" href="https://linkedin.com/in/abdulhadi-komail" target="_blank" rel="noopener noreferrer">linkedin.com/in/abdulhadi-komail</a></div></div></div>
+        <div class="item"><div class="ico"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-4a3.5 3.5 0 0 0-1-2.6c3.3-.4 6.8-1.6 6.8-7.1A5.5 5.5 0 0 0 20.3 4 5.1 5.1 0 0 0 20.2 1S19 0.6 16 2.6a13.4 13.4 0 0 0-7 0C6 0.6 4.8 1 4.8 1A5.1 5.1 0 0 0 4.7 4a5.5 5.5 0 0 0-1.5 3.8c0 5.5 3.5 6.7 6.8 7.1A3.5 3.5 0 0 0 9 18v4"/></svg></div><div><div style="font-size:.8rem;color:var(--muted);">GitHub</div><div style="font-size:.9rem;"><a class="contact-link" href="https://github.com/hadi-komail" target="_blank" rel="noopener noreferrer">github.com/hadi-komail</a></div></div></div>
+      </div>
+    </div>
+    <div class="card contact-form">
+      <h3 style="color:var(--primary);margin-bottom:1rem;" data-key="send_message_title">Send a Message</h3>
+      <form id="contact-message-form" action="https://formspree.io/f/xzdkylrb" method="POST">
+        <input id="contact-form-subject" type="hidden" name="subject" value="Website Message"/>
+        <div class="field">
+          <label for="contact-name" data-key="form_name">Name</label>
+          <input id="contact-name" name="name" type="text" required/>
+        </div>
+        <div class="field">
+          <label for="contact-email" data-key="form_email">Email</label>
+          <input id="contact-email" name="email" type="email" required/>
+        </div>
+        <div class="field">
+          <label for="contact-message" data-key="form_message">Message</label>
+          <textarea id="contact-message" name="message" required></textarea>
+        </div>
+        <button class="btn btn-outline" type="submit" data-key="form_submit">Send Message</button>
+      </form>
     </div>
   </div>
 </div>
@@ -367,6 +417,29 @@ function showPage(id){
   window.scrollTo(0,0);
 }
 function toggleMenu(){document.getElementById('navLinks').classList.toggle('open');}
+function openPaperRequestModal(title){
+  const modal=document.getElementById('paper-request-modal');
+  const subject=document.getElementById('paper-form-subject');
+  const message=document.getElementById('paper-message');
+  if(subject) subject.value=`Full Paper Request: ${title}`;
+  if(message){
+    message.value=`Hello,\n\nI would like to request the full paper for:\n${title}\n\nThank you.`;
+  }
+  if(modal) modal.classList.add('open');
+}
+function closePaperRequestModal(){
+  const modal=document.getElementById('paper-request-modal');
+  if(modal) modal.classList.remove('open');
+}
+let toastTimer;
+function showToast(message){
+  const toast=document.getElementById('toast');
+  if(!toast) return;
+  toast.textContent=message;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>toast.classList.remove('show'),3200);
+}
 function toggleAbstract(id){
   const body=document.getElementById(id);
   const arrow=document.getElementById(id+'-arrow');
@@ -501,18 +574,18 @@ const translations={
     open_to_value:'Research Assistant roles, early-career research positions, and migration or social research opportunities.',
     profile_meta_label:'Based in:',
     profile_meta_value:'Göttingen, Germany · Persian, Turkish, English, German, Pashto · Available for academic, NGO, and research-oriented roles.',
-    highlights_title:'Selected Highlights',
-    highlight_1:'Submitted a journal article, now under review, using ten rounds of European Social Survey data on value orientations and immigration attitudes in Germany.',
-    highlight_2:'Conducted 42 field interviews with migrants from Afghanistan across Turkey through phone and in-person interviews for a short-term monitoring project.',
-    highlight_3:'Developed a qualitative phenomenological proposal at Georg-August-Universität Göttingen, including a theory-based semi-structured interview guide designed for MAXQDA-supported analysis.',
-    highlight_4:'Designed and administered 100+ survey questionnaires in an original Kabul University research initiative on student relations.',
-    selected_research_title:'Selected Research',
+    highlights_title:'Research Highlights',
+    highlight_1:'Journal article under review based on ten rounds of ESS data.',
+    highlight_2:'42 field interviews across Turkey for a migrant monitoring project.',
+    highlight_3:'Phenomenological proposal with a theory-based interview guide and MAXQDA design.',
+    highlight_4:'100+ survey questionnaires designed and administered at Kabul University.',
+    selected_research_title:'Research Highlights',
     selected_research_1_title:'ESS Journal Article',
-    selected_research_1_desc:'Journal article under review on value orientations and immigration attitudes in Germany using ten rounds of European Social Survey data.',
+    selected_research_1_desc:'Under-review article on values and migration attitudes using ESS data.',
     selected_research_2_title:'Migration Proposal',
-    selected_research_2_desc:"Phenomenological working paper on migrants' social values and cultural adaptation in Germany, built around a theory-based semi-structured interview design and qualitative analysis in MAXQDA.",
+    selected_research_2_desc:"Working paper on social values and cultural adaptation using interview-based qualitative design.",
     selected_research_3_title:'Conflict Thesis',
-    selected_research_3_desc:"Bachelor's thesis on value differences and conflict structures in Afghanistan from a sociological and structuralist perspective.",
+    selected_research_3_desc:"Bachelor's thesis on value differences and conflict structures in Afghanistan.",
     glance_title:'At a Glance',
     glance_research:'Research Methods',glance_research_sub:'Qualitative<br>Quantitative<br>Mixed Methods',
     glance_data:'Data Analysis',
@@ -524,6 +597,7 @@ const translations={
     edu3_title:'German Language & Data Analysis Courses',edu3_desc:'Currently advancing German language skills from B2+ toward C1 and beyond, alongside data analysis coursework — preparing for postgraduate studies in sociology.',
     tag_inprogress:'In Progress',
     exp_title:'Experience',
+    exp0_title:'Independent Researcher',exp0_desc:'Conducting independent research on value orientations and attitudes toward migration using European Social Survey data, with a manuscript currently under review. Further work examines the impact of artificial intelligence on simulation and social behaviour, alongside academic writing on migration and conflict research.',
     exp1_title:'Intern — Research Assistant',exp1_desc:'Worked under the supervision of Dr. Sarah Langlotz to develop a qualitative phenomenological research proposal on immigrants\' social value orientations and cultural adaptation in Germany. Conducted a focused literature review, designed a semi-structured interview guide based on Schwartz\'s value theory, Gordon\'s assimilation model, and Berry\'s acculturation framework, and presented the final proposal to the Chair of Development Economics.',
     exp2_title:'Field Researcher',exp2_desc:'Conducted 42 interviews with immigrants from Afghanistan across Turkey through phone interviews and in-person visits for a short-term monitoring project focused on migrants from Afghanistan and Syria. Collected field data on migrant conditions and experiences, contributing evidence used to better understand the situation of displaced communities in Turkey.',
     exp3_title:'Intern — Data & Research',exp3_desc:'Proposed an original research project on male-female student relations at Kabul University and was accepted as an initiative intern despite the institute not normally offering internships. Worked with supervisors to design the questionnaire and collect more than 100 survey responses, building foundational experience in research design, field data collection, and project development despite the study being interrupted by changes in Afghanistan.',
@@ -552,7 +626,7 @@ const translations={
     lang_native:'Native',lang_persian:'Persian',lang_native2:'Native',lang_turkish:'Turkish',lang_proficient:'Proficient',lang_english:'English',lang_proficient2:'Proficient',lang_german:'German',lang_upper:'Upper Inter.',lang_pashto:'Pashto',lang_upper2:'Upper Inter.',
     proj_title:'Projects',proj_intro:'Explore selected research, calligraphy, and design work.',
     tab_research:'Research',tab_calligraphy:'Calligraphy',tab_design:'Graphic Design',
-    abstract:'Abstract',keywords:'Keywords:',
+    abstract:'Abstract',keywords:'Keywords:',request_paper:'Request Full Paper ↗',paper_modal_title:'Request Full Paper',paper_modal_desc:'Send a short request and I will get back to you with availability details.',request_paper_submit:'Send Request',
     proj1_title:'Relational Polarization: Value Orientations and Immigration Attitudes in Germany',
     proj1_meta:'Submitted to journal · Under review · European Social Survey',
     proj1_tag1:'ESS Longitudinal Analysis',
@@ -597,7 +671,7 @@ const translations={
     hob4_title:'Poetry Writing',hob4_desc:'Poetry was my first language for processing the world — a creative outlet that still informs how I approach sociological inquiry.',
     hob5_title:'Cultural Exploration & Travel',hob5_desc:'Having lived in Afghanistan, Turkey, and Germany, I am passionate about understanding diverse cultures, languages, and worldviews firsthand.',
     hob6_title:'Data Storytelling',hob6_desc:'Turning raw datasets into compelling visual narratives — making complexity accessible without reducing it.',
-    contact_title:'Contact',get_in_touch:'Get in Touch',
+    contact_title:'Contact',send_message_title:'Send a Message',form_name:'Name',form_email:'Email',form_message:'Message',form_submit:'Send Message',form_note:'Messages sent through this form will be delivered securely via Formspree.',get_in_touch:'Get in Touch',toast_request_sent:'Your request has been sent.',toast_request_error:'Something went wrong. Please try again.',toast_message_sent:'Your message has been sent.',toast_message_error:'Something went wrong. Please try again.',
     lbl_email:'Email',lbl_phone:'Phone',lbl_address:'Address',
   },
 
@@ -617,18 +691,18 @@ const translations={
     open_to_value:'Stellen als Research Assistant, Einstiegspositionen in der Forschung sowie Möglichkeiten in der Migrations- und Sozialforschung.',
     profile_meta_label:'Standort:',
     profile_meta_value:'Göttingen, Deutschland · Persisch, Türkisch, Englisch, Deutsch, Paschtu · Verfügbar für akademische, NGO- und forschungsorientierte Rollen.',
-    highlights_title:'Ausgewählte Highlights',
-    highlight_1:'Einen Fachartikel auf Basis von zehn Runden des European Social Survey zu Wertorientierungen und Einstellungen zur Einwanderung in Deutschland eingereicht; der Beitrag befindet sich derzeit im Begutachtungsverfahren.',
-    highlight_2:'42 Feldinterviews mit Migranten aus Afghanistan in der gesamten Türkei per Telefon und vor Ort im Rahmen eines kurzfristigen Monitoringprojekts durchgeführt.',
-    highlight_3:'Einen qualitativen phänomenologischen Forschungsvorschlag an der Georg-August-Universität Göttingen entwickelt, einschließlich eines theoriebasierten halbstrukturierten Interviewleitfadens für eine MAXQDA-gestützte Analyse.',
-    highlight_4:'Mehr als 100 Fragebögen im Rahmen einer eigenständig initiierten Forschungsstudie zu Beziehungen unter Studierenden an der Universität Kabul entwickelt und erhoben.',
-    selected_research_title:'Ausgewählte Forschung',
+    highlights_title:'Forschungshighlights',
+    highlight_1:'Fachartikel im Begutachtungsverfahren auf Basis von zehn Runden ESS-Daten.',
+    highlight_2:'42 Feldinterviews in der Türkei für ein Monitoringprojekt zu Migration.',
+    highlight_3:'Phänomenologischer Vorschlag mit theoriebasiertem Interviewleitfaden und MAXQDA-Design.',
+    highlight_4:'Mehr als 100 Fragebögen an der Universität Kabul entwickelt und erhoben.',
+    selected_research_title:'Forschungshighlights',
     selected_research_1_title:'ESS-Fachartikel',
-    selected_research_1_desc:'Zur Begutachtung eingereichter Fachartikel zu Wertorientierungen und Einstellungen zur Einwanderung in Deutschland auf Basis von zehn Runden des European Social Survey.',
+    selected_research_1_desc:'Fachartikel im Begutachtungsverfahren zu Werten und Migrationseinstellungen auf Basis von ESS-Daten.',
     selected_research_2_title:'Migrationsprojekt',
-    selected_research_2_desc:'Phänomenologisches Working Paper zu sozialen Werten von Migranten und kultureller Anpassung in Deutschland, aufgebaut auf einem theoriebasierten halbstrukturierten Interviewdesign und qualitativer Analyse in MAXQDA.',
+    selected_research_2_desc:'Working Paper zu sozialen Werten und kultureller Anpassung mit interviewbasierter qualitativer Anlage.',
     selected_research_3_title:'Konflikt-Bachelorarbeit',
-    selected_research_3_desc:'Bachelorarbeit zu Wertunterschieden und Konfliktstrukturen in Afghanistan aus soziologischer und strukturalistischer Perspektive.',
+    selected_research_3_desc:'Bachelorarbeit zu Wertunterschieden und Konfliktstrukturen in Afghanistan.',
     glance_title:'Auf einen Blick',
     glance_research:'Forschungsmethoden',glance_research_sub:'Qualitativ<br>Quantitativ<br>Gemischte Methoden',
     glance_data:'Datenanalyse',
@@ -640,6 +714,7 @@ const translations={
     edu3_title:'Deutschkurse & Datenanalyse',edu3_desc:'Derzeit Ausbau der Deutschkenntnisse von B2+ auf C1 und darüber hinaus, begleitet von Datenanalyse-Kursen — zur Vorbereitung auf ein Postgraduiertenstudium der Soziologie.',
     tag_inprogress:'Laufend',
     exp_title:'Praktische Erfahrung',
+    exp0_title:'Selbstständige Forschungstätigkeit',exp0_desc:'Ich analysiere ESS-Daten zu Werteorientierungen und Einstellungen zur Migration; das daraus entstandene Manuskript wurde eingereicht und befindet sich derzeit im Begutachtungsverfahren. Zudem untersuche ich die Auswirkungen von Künstlicher Intelligenz auf Simulation und gesellschaftliches Verhalten und verfasse wissenschaftliche Arbeiten zu Migration und Konfliktforschung.',
     exp1_title:'Praktikant — Forschungsassistenz',exp1_desc:'Unter der Betreuung von Dr. Sarah Langlotz entwickelte ich einen qualitativen phänomenologischen Forschungsvorschlag zu den sozialen Wertorientierungen von Migranten und ihrer kulturellen Anpassung in Deutschland. Ich führte eine fokussierte Literaturrecherche durch, entwickelte einen halbstrukturierten Interviewleitfaden auf Grundlage der Wertetheorie von Schwartz, des Assimilationsmodells von Gordon und des Akkulturationsmodells von Berry und präsentierte den finalen Vorschlag am Lehrstuhl für Entwicklungsökonomik.',
     exp2_title:'Feldforscher',exp2_desc:'Für ein kurzfristiges Monitoringprojekt zu Migranten aus Afghanistan und Syrien führte ich in der gesamten Türkei 42 Interviews mit Migranten aus Afghanistan per Telefon und bei Vor-Ort-Besuchen durch. Dabei erhob ich Felddaten zu Lebensbedingungen und Erfahrungen von Migranten und trug zu einer fundierteren Einschätzung der Situation vertriebener Gemeinschaften in der Türkei bei.',
     exp3_title:'Praktikant — Daten & Forschung',exp3_desc:'Ich schlug ein eigenes Forschungsprojekt zu den Beziehungen zwischen männlichen und weiblichen Studierenden an der Universität Kabul vor und wurde als Initiativpraktikant aufgenommen, obwohl das Institut normalerweise keine Praktika anbot. Gemeinsam mit den Betreuenden entwickelte ich den Fragebogen und sammelte mehr als 100 Fragebögen, wodurch ich trotz des späteren Abbruchs des Projekts infolge der Entwicklungen in Afghanistan grundlegende Erfahrung in Forschungsdesign, Datenerhebung und Projektentwicklung gewann.',
@@ -668,7 +743,7 @@ const translations={
     lang_native:'Muttersprache',lang_persian:'Persisch',lang_native2:'Muttersprache',lang_turkish:'Türkisch',lang_proficient:'Fließend',lang_english:'Englisch',lang_proficient2:'Fließend',lang_german:'Deutsch',lang_upper:'Obere Mittelstufe',lang_pashto:'Paschtu',lang_upper2:'Obere Mittelstufe',
     proj_title:'Projekte',proj_intro:'Wählen Sie eine Kategorie, um meine Arbeiten zu erkunden.',
     tab_research:'Forschung',tab_calligraphy:'Kalligraphie',tab_design:'Grafikdesign',
-    abstract:'Zusammenfassung',keywords:'Schlüsselwörter:',
+    abstract:'Zusammenfassung',keywords:'Schlüsselwörter:',request_paper:'Volltext anfragen ↗',paper_modal_title:'Volltext anfragen',paper_modal_desc:'Senden Sie eine kurze Anfrage, und ich melde mich mit Informationen zur Verfügbarkeit zurück.',request_paper_submit:'Anfrage senden',
     proj1_title:'Relationale Polarisierung: Wertorientierungen und Einstellungen zur Einwanderung in Deutschland',
     proj1_meta:'Bei einer Fachzeitschrift eingereicht · Im Begutachtungsverfahren · European Social Survey',
     proj1_tag1:'ESS-Längsschnittanalyse',
@@ -713,7 +788,7 @@ const translations={
     hob4_title:'Poesie schreiben',hob4_desc:'Poesie war meine erste Sprache, um die Welt zu verarbeiten — ein kreativer Ausdruck, der noch heute meine soziologische Forschung prägt.',
     hob5_title:'Kulturerkundung & Reisen',hob5_desc:'Da ich in Afghanistan, der Türkei und Deutschland gelebt habe, bin ich leidenschaftlich daran interessiert, verschiedene Kulturen, Sprachen und Weltanschauungen aus erster Hand zu verstehen.',
     hob6_title:'Daten-Storytelling',hob6_desc:'Rohdatensätze in überzeugende visuelle Narrative verwandeln — Komplexität zugänglich machen, ohne sie zu vereinfachen.',
-    contact_title:'Kontakt',get_in_touch:'Kontakt aufnehmen',
+    contact_title:'Kontakt',send_message_title:'Nachricht senden',form_name:'Name',form_email:'E-Mail',form_message:'Nachricht',form_submit:'Nachricht senden',form_note:'Über dieses Formular gesendete Nachrichten werden sicher über Formspree zugestellt.',get_in_touch:'Kontakt aufnehmen',toast_request_sent:'Ihre Anfrage wurde gesendet.',toast_request_error:'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',toast_message_sent:'Ihre Nachricht wurde gesendet.',toast_message_error:'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
     lbl_email:'E-Mail',lbl_phone:'Telefon',lbl_address:'Adresse',
   },
 
@@ -733,18 +808,18 @@ const translations={
     open_to_value:'Araştırma asistanlığı rolleri, kariyerinin başındaki araştırmacı pozisyonları ve göç ya da sosyal araştırma alanındaki fırsatlar.',
     profile_meta_label:'Konum:',
     profile_meta_value:'Göttingen, Almanya · Farsça, Türkçe, İngilizce, Almanca, Peştuca · Akademik, STK ve araştırma odaklı roller için uygun.',
-    highlights_title:'Öne Çıkanlar',
-    highlight_1:'Avrupa Sosyal Araştırması verisinin on turunu kullanarak Almanya’da değer yönelimleri ve göç tutumları üzerine bir makale sundum; çalışma şu anda hakem değerlendirmesindedir.',
-    highlight_2:'Kısa süreli bir izleme projesi kapsamında Türkiye genelinde Afganistan\'dan gelen göçmenlerle telefon ve yüz yüze yöntemlerle 42 saha görüşmesi gerçekleştirdim.',
-    highlight_3:'Georg-August-Universität Göttingen’de, teori temelli yarı yapılandırılmış görüşme kılavuzu ve MAXQDA destekli analiz planı içeren nitel fenomenolojik bir araştırma önerisi geliştirdim.',
-    highlight_4:'Kabil Üniversitesi’nde öğrenci ilişkileri üzerine özgün bir araştırma girişimi kapsamında 100’den fazla anket formu tasarladım ve uyguladım.',
-    selected_research_title:'Seçilmiş Araştırmalar',
+    highlights_title:'Araştırma Öne Çıkanları',
+    highlight_1:'ESS verisinin on turuna dayanan bir makale hakem değerlendirmesindedir.',
+    highlight_2:'Türkiye genelinde bir göç izleme projesi için 42 saha görüşmesi gerçekleştirdim.',
+    highlight_3:'Teori temelli görüşme kılavuzu ve MAXQDA tasarımıyla fenomenolojik bir öneri geliştirdim.',
+    highlight_4:'Kabil Üniversitesi’nde 100’den fazla anket tasarladım ve uyguladım.',
+    selected_research_title:'Araştırma Öne Çıkanları',
     selected_research_1_title:'ESS Makalesi',
-    selected_research_1_desc:'Avrupa Sosyal Araştırması’nın on turunu kullanarak Almanya’da değer yönelimleri ve göç tutumlarını inceleyen, hakem değerlendirmesindeki dergi makalesi.',
+    selected_research_1_desc:'ESS verisiyle değerler ve göç tutumları üzerine, hakem değerlendirmesindeki makale.',
     selected_research_2_title:'Göç Çalışması',
-    selected_research_2_desc:'Almanya’da göçmenlerin sosyal değerleri ve kültürel uyumu üzerine, teori temelli yarı yapılandırılmış görüşme tasarımı ve MAXQDA analizine dayanan fenomenolojik çalışma metni.',
+    selected_research_2_desc:'Sosyal değerler ve kültürel uyum üzerine, görüşme temelli nitel tasarıma dayanan çalışma metni.',
     selected_research_3_title:'Çatışma Tezi',
-    selected_research_3_desc:'Afganistan’daki değer farklılıkları ve çatışma yapıları üzerine sosyolojik ve yapısalcı perspektiften lisans tezi.',
+    selected_research_3_desc:'Afganistan’da değer farklılıkları ve çatışma yapıları üzerine lisans tezi.',
     glance_title:'Kısa Bakış',
     glance_research:'Araştırma Yöntemleri',glance_research_sub:'Nitel<br>Nicel<br>Karma Yöntemler',
     glance_data:'Veri Analizi',
@@ -756,6 +831,7 @@ const translations={
     edu3_title:'Almanca Dil Kursları & Veri Analizi',edu3_desc:'Almancayı B2+ düzeyinden C1 ve ötesine taşıma çalışmaları, veri analizi kurslarıyla birlikte — sosyoloji alanında lisansüstü eğitime hazırlık.',
     tag_inprogress:'Devam Ediyor',
     exp_title:'Pratik Deneyim',
+    exp0_title:'Bağımsız Araştırma Faaliyeti',exp0_desc:'Avrupa Sosyal Araştırması verilerini kullanarak değer yönelimleri ve göç tutumları üzerine bağımsız araştırma yürütüyor, şu anda hakem değerlendirmesinde olan bir makale üzerinde çalışıyorum. Ayrıca yapay zekanın simülasyon ve toplumsal davranış üzerindeki etkilerini inceliyor ve göç ile çatışma araştırmaları alanında akademik metinler yazıyorum.',
     exp1_title:'Stajyer — Araştırma Asistanı',exp1_desc:'Dr. Sarah Langlotz danışmanlığında, Almanya\'daki göçmenlerin sosyal değer yönelimleri ile kültürel uyum süreçleri üzerine nitel, fenomenolojik bir araştırma önerisi geliştirdim. Odaklı bir literatür taraması yaptım, Schwartz\'ın değer kuramı, Gordon\'un asimilasyon modeli ve Berry\'nin akültürasyon çerçevesine dayalı yarı yapılandırılmış bir görüşme formu hazırladım ve nihai öneriyi Kalkınma Ekonomisi kürsüsünde sundum.',
     exp2_title:'Saha Araştırmacısı',exp2_desc:'Afganistan ve Suriye\'den gelen göçmenlere odaklanan kısa süreli bir izleme projesi kapsamında, Türkiye genelinde Afganistan\'dan gelen göçmenlerle telefon görüşmeleri ve yüz yüze ziyaretler yoluyla 42 görüşme gerçekleştirdim. Göçmenlerin yaşam koşulları ve deneyimlerine ilişkin saha verileri toplayarak Türkiye\'deki yerinden edilmiş toplulukların durumunun daha iyi anlaşılmasına katkı sundum.',
     exp3_title:'Stajyer — Veri & Araştırma',exp3_desc:'Kabil Üniversitesi\'nde kadın ve erkek öğrenciler arasındaki ilişkiler üzerine özgün bir araştırma projesi önerdim ve kurum normalde staj imkanı sunmamasına rağmen inisiyatif alan bir stajyer olarak kabul edildim. Danışmanlarla birlikte anket formunu geliştirdim ve 100\'den fazla anket topladım; proje Afganistan\'daki gelişmeler nedeniyle yarıda kalsa da bu süreç bana araştırma tasarımı, saha verisi toplama ve proje geliştirme konusunda güçlü bir temel kazandırdı.',
@@ -784,7 +860,7 @@ const translations={
     lang_native:'Anadil',lang_persian:'Farsça',lang_native2:'Anadil',lang_turkish:'Türkçe',lang_proficient:'İleri',lang_english:'İngilizce',lang_proficient2:'İleri',lang_german:'Almanca',lang_upper:'Üst Orta',lang_pashto:'Peştuca',lang_upper2:'Üst Orta',
     proj_title:'Projeler',proj_intro:'Çalışmalarımı keşfetmek için bir kategori seçin.',
     tab_research:'Araştırma',tab_calligraphy:'Hat Sanatı',tab_design:'Grafik Tasarım',
-    abstract:'Özet',keywords:'Anahtar Kelimeler:',
+    abstract:'Özet',keywords:'Anahtar Kelimeler:',request_paper:'Tam metni iste ↗',paper_modal_title:'Tam metni iste',paper_modal_desc:'Kısa bir talep gönderin; uygunluk bilgileriyle size geri döneyim.',request_paper_submit:'Talep Gönder',
     proj1_title:'İlişkisel Kutuplaşma: Almanya\'da Değer Yönelimleri ve Göç Tutumları',
     proj1_meta:'Dergiye gönderildi · Değerlendirme sürecinde · European Social Survey',
     proj1_tag1:'ESS Boylamsal Analizi',
@@ -829,12 +905,57 @@ const translations={
     hob4_title:'Şiir Yazma',hob4_desc:'Şiir, dünyayı işlemenin ilk dilimdi — sosyolojik araştırma yaklaşımımı hâlâ etkileyen yaratıcı bir ifade biçimi.',
     hob5_title:'Kültürel Keşif & Seyahat',hob5_desc:'Afganistan, Türkiye ve Almanya\'da yaşamış biri olarak farklı kültürleri, dilleri ve dünya görüşlerini bizzat anlamaya tutkuyla bağlıyım.',
     hob6_title:'Veri Hikâyeciliği',hob6_desc:'Ham veri setlerini etkileyici görsel anlatılara dönüştürmek — karmaşıklığı basitleştirmeden erişilebilir kılmak.',
-    contact_title:'İletişim',get_in_touch:'İletişime Geç',
+    contact_title:'İletişim',send_message_title:'Mesaj Gönder',form_name:'İsim',form_email:'E-posta',form_message:'Mesaj',form_submit:'Mesaj Gönder',form_note:'Bu form üzerinden gönderilen mesajlar Formspree aracılığıyla güvenli şekilde iletilir.',get_in_touch:'İletişime Geç',toast_request_sent:'Talebiniz gönderildi.',toast_request_error:'Bir sorun oluştu. Lütfen tekrar deneyin.',toast_message_sent:'Mesajınız gönderildi.',toast_message_error:'Bir sorun oluştu. Lütfen tekrar deneyin.',
     lbl_email:'E-posta',lbl_phone:'Telefon',lbl_address:'Adres',
   }
 };
 
 let currentLang='en';
+
+const paperRequestForm=document.getElementById('paper-request-form');
+if(paperRequestForm){
+  paperRequestForm.addEventListener('submit', async (event)=>{
+    event.preventDefault();
+    const form=event.currentTarget;
+    try{
+      const response=await fetch(form.action,{
+        method:'POST',
+        body:new FormData(form),
+        headers:{'Accept':'application/json'}
+      });
+      if(!response.ok) throw new Error('Request failed');
+      form.reset();
+      const subject=document.getElementById('paper-form-subject');
+      if(subject) subject.value='Full Paper Request';
+      closePaperRequestModal();
+      showToast(translations[currentLang].toast_request_sent || 'Your request has been sent.');
+    }catch(error){
+      showToast(translations[currentLang].toast_request_error || 'Something went wrong. Please try again.');
+    }
+  });
+}
+
+const contactMessageForm=document.getElementById('contact-message-form');
+if(contactMessageForm){
+  contactMessageForm.addEventListener('submit', async (event)=>{
+    event.preventDefault();
+    const form=event.currentTarget;
+    try{
+      const response=await fetch(form.action,{
+        method:'POST',
+        body:new FormData(form),
+        headers:{'Accept':'application/json'}
+      });
+      if(!response.ok) throw new Error('Request failed');
+      form.reset();
+      const subject=document.getElementById('contact-form-subject');
+      if(subject) subject.value='Website Message';
+      showToast(translations[currentLang].toast_message_sent || 'Your message has been sent.');
+    }catch(error){
+      showToast(translations[currentLang].toast_message_error || 'Something went wrong. Please try again.');
+    }
+  });
+}
 
 function setLang(lang, event){
   currentLang=lang;
